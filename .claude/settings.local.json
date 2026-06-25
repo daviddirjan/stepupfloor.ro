@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs php -l)",
+      "Bash(/opt/homebrew/bin/php -l /Users/axiontic/Desktop/stepupfloor/index.php)",
+      "Bash(zip *)"
+    ]
+  }
+}
