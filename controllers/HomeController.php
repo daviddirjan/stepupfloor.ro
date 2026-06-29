@@ -5,23 +5,19 @@ class HomeController
     private ServiceModel $serviceModel;
     private ProductModel $productModel;
     private TestimonialModel $testimonialModel;
-    private StatModel $statModel;
 
     public function __construct()
     {
         $this->serviceModel     = new ServiceModel();
         $this->productModel     = new ProductModel();
         $this->testimonialModel = new TestimonialModel();
-        $this->statModel        = new StatModel();
     }
 
     public function index(): void
     {
         $data = [
-            'stats'        => $this->statModel->getAll(),
             'services'     => $this->serviceModel->getAll(),
-            'featured'     => $this->productModel->getFeatured(),
-            'products'     => $this->productModel->getGrid(3),
+            'products'     => $this->productModel->getGrid(4),
             'testimonials' => $this->testimonialModel->getAll(),
         ];
 

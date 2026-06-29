@@ -1,30 +1,38 @@
 <!-- ═══════════════════════════════════════════ HERO ═══ -->
 <section class="hero-section" id="acasa">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <p class="label-tag">Timișoara · Vestul României</p>
-        <h1>Mochete și covoare montate perfect</h1>
-        <p class="hero-sub">Transformăm spații cu instalații profesionale de mochete și covoare PVC în Timișoara și vestul țării. Calitate și precizie în fiecare proiect.</p>
-        <div class="btn-group">
-          <a href="#contact" class="btn-primary">Solicită ofertă</a>
-          <a href="#produse" class="btn-secondary">Produse</a>
-        </div>
-      </div>
-      <div class="hero-img-cell">
-        <div class="img-placeholder"></div>
-        <div class="hero-accent-bar"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="label-tag">Timișoara · Vestul României</p>
+      <h1>Mochete și covoare montate perfect</h1>
+      <p class="hero-sub">Transformăm spații cu instalații profesionale de mochete și covoare PVC în Timișoara și vestul țării. Calitate și precizie în fiecare proiect.</p>
+      <div class="btn-group">
+        <a href="#contact" class="btn-primary">Solicită ofertă</a>
+        <a href="#produse" class="btn-secondary">Produse</a>
       </div>
     </div>
+    <div class="hero-img-cell">
+      <div class="img-placeholder"></div>
+      <div class="hero-accent-bar"></div>
+    </div>
+  </div>
 
-    <!-- Stats strip -->
-    <div class="stats-strip stats-outer">
-      <?php foreach ($stats as $key => $stat): ?>
-      <div class="stat-cell">
-        <p class="stat-value"><?= htmlspecialchars($stat['stat_value']) ?></p>
-        <p class="stat-label"><?= htmlspecialchars($stat['label']) ?></p>
-      </div>
-      <?php endforeach; ?>
+  <!-- Stats strip (static, not database-driven) -->
+  <div class="stats-strip stats-outer">
+    <div class="stat-cell">
+      <p class="stat-value">20+</p>
+      <p class="stat-label">ani de experiență</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-value">1000+</p>
+      <p class="stat-label">proiecte finalizate</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-value">5★</p>
+      <p class="stat-label">pe Google Maps</p>
+    </div>
+    <div class="stat-cell">
+      <p class="stat-value">8</p>
+      <p class="stat-label">județe acoperite</p>
     </div>
   </div>
 </section>
@@ -115,24 +123,9 @@
       <p class="body-text">Gama completă de materiale de calitate</p>
     </div>
 
-    <?php if ($featured): ?>
-    <div class="products-split">
-      <div class="featured-img img-placeholder"></div>
-      <div class="featured-content">
-        <p class="badge-label"><?= htmlspecialchars($featured['badge']) ?></p>
-        <h3><?= htmlspecialchars($featured['heading']) ?></h3>
-        <p class="body-text"><?= htmlspecialchars($featured['description']) ?></p>
-        <div class="btn-group">
-          <a href="<?= BASE_URL ?>produse" class="btn-secondary">Vezi produse</a>
-          <a href="<?= BASE_URL ?>produse" class="btn-link">Explorare <span>→</span></a>
-        </div>
-      </div>
-    </div>
-    <?php endif; ?>
-
     <div class="product-grid feat-grid">
-      <?php foreach ($products as $idx => $product): ?>
-      <div class="product-card feat-card<?= ($idx === 2) ? ' feat-col2' : '' ?>">
+      <?php foreach ($products as $product): ?>
+      <div class="product-card feat-card">
         <div class="product-img img-placeholder" style="aspect-ratio:5/4;"></div>
         <div class="product-info">
           <p class="product-cat"><?= htmlspecialchars($product['category']) ?></p>
@@ -213,20 +206,21 @@
           <p class="contact-block-label">Email</p>
           <h3 class="contact-block-title">Scrieți-ne oricând</h3>
           <p class="contact-block-sub">Răspundem în maxim 24 ore</p>
-          <a href="mailto:info@stepupfloor.ro" class="contact-block-value">info@stepupfloor.ro</a>
+          <a href="mailto:office@stepupsolutions.ro" class="contact-block-value">office@stepupsolutions.ro</a>
         </div>
         <div class="contact-divider"></div>
         <div class="contact-block">
           <p class="contact-block-label">Telefon</p>
           <h3 class="contact-block-title">Sunați direct</h3>
           <p class="contact-block-sub">Luni–Vineri, 8:00–18:00</p>
-          <a href="tel:+40256123456" class="contact-block-value">+40 256 123 456</a>
+          <a href="tel:+40745990503" class="contact-block-value">0745 990 503</a>
+          <a href="tel:+40745456008" class="contact-block-value">0745 456 008</a>
         </div>
         <div class="contact-divider"></div>
         <div class="contact-block">
           <p class="contact-block-label">Adresă</p>
           <h3 class="contact-block-title">Biroul nostru</h3>
-          <p class="contact-block-sub">Timișoara, județul Timiș, România</p>
+          <p class="contact-block-sub">Strada Aristide Demetriade 9, 300072 Timișoara</p>
         </div>
       </div>
 

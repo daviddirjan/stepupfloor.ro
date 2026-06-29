@@ -1,0 +1,531 @@
+/* ==========================================================================
+   StepUp Floor — Admin Panel
+   Tokens moștenite din style.css pentru coeziune vizuală
+   ========================================================================== */
+
+/* ---------- Fonts (aceleași ca site-ul public) ---------- */
+@font-face { font-family:'Inter'; src:url('../fonts/inter-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Inter'; src:url('../fonts/inter-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Inter'; src:url('../fonts/inter-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Inter'; src:url('../fonts/inter-700.woff2') format('woff2'); font-weight:700; font-display:swap; }
+
+/* ---------- Tokens (identice cu site-ul) ---------- */
+:root {
+  --color-text:        #0C0A01;
+  --color-muted:       #54534D;
+  --color-subtle:      #858480;
+  --color-light:       #F2F2F2;
+  --color-border:      rgba(12,10,1,0.12);
+  --color-border-soft: rgba(12,10,1,0.08);
+  --color-primary:     #2B6090;
+  --color-primary-dark:#1E4A6E;
+  --color-cta:         #1D5FAA;
+  --color-cta-dark:    #163e7a;
+  --color-navy:        #0F2443;
+  --color-white:       #ffffff;
+  --color-bg:          #F2F2F2;
+
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body:    'Lora', serif;
+  --font-ui:      'Inter', sans-serif;
+
+  --radius: 0;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html  { scroll-behavior: smooth; }
+body  { font-family: var(--font-ui); font-size: 14px; color: var(--color-text); background: var(--color-bg); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+img   { max-width: 100%; display: block; }
+a     { text-decoration: none; color: inherit; }
+ul    { list-style: none; }
+input, textarea, select, button { font-family: inherit; }
+
+/* ==========================================================================
+   LOGIN PAGE
+   ========================================================================== */
+.admin-login-page {
+  background: var(--color-navy);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wrap { width: 100%; max-width: 420px; padding: 1.5rem; }
+
+.login-box {
+  background: var(--color-white);
+  border-top: 3px solid var(--color-cta);
+  padding: 2.5rem;
+}
+
+.login-logo { margin-bottom: 2rem; }
+.login-logo img { height: 44px; width: auto; }
+
+.login-box h1 {
+  font-family: var(--font-body);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   ADMIN LAYOUT (sidebar + main)
+   ========================================================================== */
+.admin-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.admin-sidebar {
+  background: var(--color-navy);
+  color: rgba(255,255,255,0.75);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 1.5rem 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-brand img { height: 38px; width: auto; filter: brightness(0) invert(1); }
+.sidebar-brand span {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.5rem;
+}
+
+.sidebar-nav { flex: 1; padding: 1rem 0; }
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  transition: color 150ms, background 150ms;
+  border-left: 2px solid transparent;
+}
+.sidebar-nav a:hover  { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.04); }
+.sidebar-nav a.active { color: #fff; border-left-color: var(--color-cta); background: rgba(29,95,170,0.12); }
+
+.sidebar-nav .nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+.sidebar-nav a.active .nav-dot,
+.sidebar-nav a:hover .nav-dot { opacity: 1; }
+
+.sidebar-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  padding: 1.25rem 1.5rem 0.4rem;
+}
+
+.badge {
+  margin-left: auto;
+  background: var(--color-cta);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 1px 7px;
+  border-radius: 20px;
+}
+
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.sidebar-footer a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  padding: 0.4rem 0;
+  transition: color 150ms;
+}
+.sidebar-footer a:hover  { color: rgba(255,255,255,0.75); }
+.sidebar-footer a.active { color: rgba(255,255,255,0.9); }
+
+/* ---------- Main area ---------- */
+.admin-main { display: flex; flex-direction: column; min-height: 100vh; }
+
+.admin-topbar {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-topbar h1 {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.admin-content { padding: 2rem; flex: 1; }
+
+/* ==========================================================================
+   FLASH MESSAGES (identice cu site-ul — .alert)
+   ========================================================================== */
+.flash {
+  padding: 0.875rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  border: 1px solid;
+}
+.flash-success { background: #E8F3EE; border-color: #62AD89; color: #186F45; }
+.flash-error   { background: #F8EBE9; border-color: #D2746A; color: #992D22; }
+
+/* ==========================================================================
+   ANALYTICS DASHBOARD
+   ========================================================================== */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--color-white);
+  padding: 1.5rem;
+  position: relative;
+}
+.stat-card--accent { border-top: 2px solid var(--color-cta); }
+.stat-card--green  { border-top: 2px solid #2d7a55; }
+.stat-card--warn   { border-top: 2px solid #992D22; }
+
+.stat-card .stat-label-tag {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+  margin-bottom: 0.75rem;
+}
+.stat-card .stat-val {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-navy);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-card .stat-lbl {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 0.375rem;
+}
+.stat-card .stat-sub {
+  font-size: 0.75rem;
+  color: var(--color-subtle);
+  margin-top: 0.2rem;
+}
+
+/* ---------- Bar chart ---------- */
+.chart-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.chart-header { margin-bottom: 1.25rem; }
+.chart-header h2 {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+.bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 80px; }
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+.bar-fill {
+  width: 100%;
+  background: var(--color-primary);
+  min-height: 2px;
+  opacity: 0.7;
+  transition: opacity 150ms;
+}
+.bar-col:hover .bar-fill { opacity: 1; background: var(--color-cta); }
+
+.chart-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 11px;
+  color: var(--color-subtle);
+  font-family: var(--font-ui);
+}
+
+/* ---------- Quick actions ---------- */
+.quick-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+.table-wrap {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td {
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+th {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(12,10,1,0.018); }
+
+.tr-unread td { font-weight: 600; }
+.tr-unread:hover td { background: rgba(12,10,1,0.03); }
+
+td .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.table-header h2 {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+.form-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  max-width: 720px;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+.form-group label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid rgba(12,10,1,0.2);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background: var(--color-white);
+  outline: none;
+  transition: border-color 200ms;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--color-cta); }
+
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group textarea.body-area { min-height: 340px; font-family: var(--font-ui); font-size: 0.875rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.img-preview { margin-top: 0.5rem; max-height: 120px; border: 1px solid var(--color-border); }
+
+.form-actions { display: flex; gap: 0.75rem; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-soft); }
+
+.checkbox-row { display: flex; align-items: center; gap: 0.5rem; }
+.checkbox-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--color-cta); }
+.checkbox-row label { font-size: 0.875rem; font-weight: 500; margin: 0; text-transform: none; letter-spacing: 0; }
+
+/* ==========================================================================
+   BUTTONS (aceleași convenții ca site-ul public)
+   ========================================================================== */
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 180ms ease;
+  text-decoration: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-primary {
+  background: var(--color-cta);
+  color: #fff;
+  border: 1px solid var(--color-cta);
+}
+.btn-primary:hover { background: var(--color-cta-dark); border-color: var(--color-cta-dark); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover { background: rgba(12,10,1,0.05); }
+
+.btn-danger {
+  background: transparent;
+  color: #992D22;
+  border: 1px solid rgba(153,45,34,0.3);
+}
+.btn-danger:hover { background: #F8EBE9; border-color: #D2746A; }
+
+.btn-warning {
+  background: transparent;
+  color: var(--color-cta);
+  border: 1px solid rgba(29,95,170,0.3);
+}
+.btn-warning:hover { background: rgba(29,95,170,0.06); }
+
+.btn-sm { padding: 0.375rem 0.875rem; font-size: 11px; }
+.btn-full { width: 100%; justify-content: center; padding: 0.75rem; font-size: 13px; }
+
+/* ==========================================================================
+   STATUS PILLS
+   ========================================================================== */
+.pill {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.pill-green  { background: #E8F3EE; color: #186F45; }
+.pill-gray   { background: var(--color-bg); color: var(--color-subtle); }
+.pill-yellow { background: #FEF3C7; color: #92400E; }
+
+/* ==========================================================================
+   SETTINGS PAGE
+   ========================================================================== */
+
+.settings-status-bar { display:flex; align-items:center; gap:.5rem; padding:.875rem 1.25rem;
+  margin-bottom:2rem; font-family:var(--font-ui); font-size:.9rem; border-radius:2px; }
+.settings-status-bar--ok   { background:#DCFCE7; color:#166534; }
+.settings-status-bar--warn { background:#FEF9C3; color:#854D0E; }
+
+.settings-section-title { font-family:var(--font-ui); font-weight:700; font-size:1rem;
+  margin-bottom:.375rem; display:flex; align-items:center; }
+
+.settings-desc { font-family:var(--font-ui); font-size:.875rem; color:var(--color-muted);
+  margin-bottom:1.75rem; line-height:1.6; }
+.settings-desc a { color:var(--color-primary); }
+
+.settings-key-hint { font-family:var(--font-ui); font-weight:400; font-size:.78rem;
+  color:var(--color-muted); margin-left:.5rem; }
+.settings-key-hint code { background:var(--color-bg); padding:.05rem .3rem;
+  font-family:monospace; font-size:.8em; }
+
+.settings-input-wrap { display:flex; align-items:center; gap:.5rem; }
+.settings-input-wrap input { flex:1; font-family:monospace; font-size:.875rem;
+  letter-spacing:.02em; }
+
+.settings-toggle-btn { background:none; border:1px solid var(--color-border); cursor:pointer;
+  padding:.4rem .5rem; color:var(--color-muted); display:flex; align-items:center;
+  flex-shrink:0; transition:color .15s; }
+.settings-toggle-btn:hover { color:var(--color-text); }
+
+.settings-badge { font-family:var(--font-ui); font-size:.7rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; padding:.2rem .55rem;
+  flex-shrink:0; white-space:nowrap; }
+.settings-badge--ok   { background:#DCFCE7; color:#166534; }
+.settings-badge--warn { background:#FEF9C3; color:#854D0E; }
+
+.settings-field-note { font-family:var(--font-ui); font-size:.78rem; color:var(--color-muted);
+  margin-top:.35rem; line-height:1.5; }
+.settings-field-note code { font-family:monospace; background:var(--color-bg);
+  padding:.05rem .3rem; font-size:.9em; word-break:break-all; }

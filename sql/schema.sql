@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS products (
   category     VARCHAR(80)      NOT NULL,
   price_label  VARCHAR(40)      NOT NULL,
   heading      VARCHAR(200)     NOT NULL DEFAULT '',
-  description  TEXT             NOT NULL DEFAULT '',
+  description  TEXT             NOT NULL,
   badge        VARCHAR(80)      NOT NULL DEFAULT '',
   image        VARCHAR(200)     NOT NULL DEFAULT '',
   is_featured  TINYINT(1)       NOT NULL DEFAULT 0,
@@ -126,7 +126,17 @@ INSERT INTO products (slug, name, category, price_label, heading, description, b
    '',
    '',
    0,
-   3)
+   3),
+  ('covor-pvc-lemn',
+   'Covor PVC lemn',
+   'Covor PVC · Decor lemn',
+   '79 lei/m²',
+   '',
+   '',
+   '',
+   '',
+   0,
+   4)
 ON DUPLICATE KEY UPDATE
   name=VALUES(name), category=VALUES(category),
   price_label=VALUES(price_label), heading=VALUES(heading),
