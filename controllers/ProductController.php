@@ -11,16 +11,18 @@ class ProductController
             return;
         }
 
-        $images   = (new ProductImageModel())->getByProductId((int)$product['id']);
-        $category = $product['category_id']
+        $images        = (new ProductImageModel())->getByProductId((int)$product['id']);
+        $colorVariants = (new ProductColorModel())->getByProductId((int)$product['id']);
+        $category      = $product['category_id']
             ? (new CategoryModel())->findById((int)$product['category_id'])
             : null;
 
         $this->render('shop/product', [
-            'pageTitle' => $product['name'],
-            'product'   => $product,
-            'images'    => $images,
-            'category'  => $category,
+            'pageTitle'     => $product['name'],
+            'product'       => $product,
+            'images'        => $images,
+            'colorVariants' => $colorVariants,
+            'category'      => $category,
         ]);
     }
 
