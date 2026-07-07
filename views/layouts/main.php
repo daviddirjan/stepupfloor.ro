@@ -54,7 +54,7 @@
               </a>
             </div>
             <div class="mega-cards mega-cards--2">
-              <a href="<?= BASE_URL ?>#montaj" class="mega-card">
+              <a href="<?= BASE_URL ?>servicii/montaj" class="mega-card">
                 <div class="mega-card-img mega-card-img--light">
                   <div class="mega-card-img-label">fotografie montaj</div>
                   <span class="mega-card-badge">Serviciu</span>
@@ -64,7 +64,7 @@
                   <p class="mega-card-desc">Instalare rapidă și precisă în 24–48 ore, fără surprize.</p>
                 </div>
               </a>
-              <a href="<?= BASE_URL ?>#intretinere" class="mega-card">
+              <a href="<?= BASE_URL ?>servicii/intretinere" class="mega-card">
                 <div class="mega-card-img mega-card-img--light2">
                   <div class="mega-card-img-label">fotografie întreținere</div>
                   <span class="mega-card-badge">Serviciu</span>
@@ -179,8 +179,8 @@
         <svg class="chevron" viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="mobile-sub">
-        <a href="<?= BASE_URL ?>#montaj"      class="mobile-sub-link" onclick="closeMobileMenu()">Montaj</a>
-        <a href="<?= BASE_URL ?>#intretinere" class="mobile-sub-link" onclick="closeMobileMenu()">Întreținere</a>
+        <a href="<?= BASE_URL ?>servicii/montaj"      class="mobile-sub-link" onclick="closeMobileMenu()">Montaj</a>
+        <a href="<?= BASE_URL ?>servicii/intretinere" class="mobile-sub-link" onclick="closeMobileMenu()">Întreținere</a>
       </div>
     </div>
 

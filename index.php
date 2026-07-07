@@ -87,6 +87,18 @@ switch ($segment) {
         };
         break;
 
+    case 'despre-noi':
+        (new ServiceController())->desprenoi();
+        break;
+
+    case 'servicii':
+        match ($parts[1] ?? '') {
+            'montaj'      => (new ServiceController())->montaj(),
+            'intretinere' => (new ServiceController())->intretinere(),
+            default       => (function () { http_response_code(404); echo '<h1>404</h1>'; })(),
+        };
+        break;
+
     case 'proiecte':
         (new ProjectController())->index();
         break;

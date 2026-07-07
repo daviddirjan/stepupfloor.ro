@@ -24,7 +24,9 @@
       "Bash(node check5.js)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('card bottom', d['cards'][1]['bottom']\\); print\\('btn top', d['btn']['top']\\)\")",
       "Bash(python3 -c ' *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(php --version)",
+      "Bash(python3 *)"
     ]
   }
 }
