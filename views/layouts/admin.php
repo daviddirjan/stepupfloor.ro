@@ -42,10 +42,6 @@
             <span class="nav-dot"></span>
             Produse
         </a>
-        <a href="<?= BASE_URL ?>admin/blog" class="<?= str_starts_with($currentUrl, 'admin/blog') ? 'active' : '' ?>">
-            <span class="nav-dot"></span>
-            Blog
-        </a>
         <a href="<?= BASE_URL ?>admin/projects" class="<?= str_starts_with($currentUrl, 'admin/projects') ? 'active' : '' ?>">
             <span class="nav-dot"></span>
             Proiecte
@@ -80,7 +76,10 @@
     <div class="sidebar-footer">
         <a href="<?= BASE_URL ?>">Mergi la site</a>
         <a href="<?= BASE_URL ?>admin/docs" class="<?= str_starts_with($currentUrl, 'admin/docs') ? 'active' : '' ?>">Documentatie</a>
-        <a href="<?= BASE_URL ?>admin/logout">Deconectare</a>
+        <form method="POST" action="<?= BASE_URL ?>admin/logout" class="logout-form">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+            <button type="submit" class="logout-btn">Deconectare</button>
+        </form>
     </div>
 </aside>
 

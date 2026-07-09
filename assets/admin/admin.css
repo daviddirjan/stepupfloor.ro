@@ -3,12 +3,6 @@
    Tokens moștenite din style.css pentru coeziune vizuală
    ========================================================================== */
 
-/* ---------- Fonts (aceleași ca site-ul public) ---------- */
-@font-face { font-family:'Inter'; src:url('../fonts/inter-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-700.woff2') format('woff2'); font-weight:700; font-display:swap; }
-
 /* ---------- Tokens (identice cu site-ul) ---------- */
 :root {
   --color-text:        #0C0A01;
@@ -177,6 +171,21 @@ input, textarea, select, button { font-family: inherit; }
 }
 .sidebar-footer a:hover  { color: rgba(255,255,255,0.75); }
 .sidebar-footer a.active { color: rgba(255,255,255,0.9); }
+.sidebar-footer .logout-form { margin: 0; }
+.sidebar-footer .logout-btn {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  padding: 0.4rem 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: color 150ms;
+}
+.sidebar-footer .logout-btn:hover { color: rgba(255,255,255,0.75); }
 
 /* ---------- Main area ---------- */
 .admin-main { display: flex; flex-direction: column; min-height: 100vh; }

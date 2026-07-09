@@ -74,7 +74,7 @@ class StripeController
             'notes'                    => trim($_POST['notes'] ?? ''),
             'stripe_payment_intent_id' => trim($_POST['payment_intent_id'] ?? ''),
             'total'                    => CartHelper::total(),
-            'status'                   => 'confirmed',
+            'status'                   => 'pending',
         ];
 
         $lineItems = [];
@@ -92,6 +92,7 @@ class StripeController
         try {
             $orderId = (new OrderModel())->createWithItems($order, $lineItems);
             CartHelper::clear();
+            $_SESSION['recent_order_ids'][] = $orderId;
             echo json_encode(['success' => true, 'order_id' => $orderId]);
         } catch (Exception $e) {
             http_response_code(500);

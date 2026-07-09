@@ -138,8 +138,7 @@ $patterns = [
       $pattern = $patterns[$i % count($patterns)];
       $tagsJson = htmlspecialchars(json_encode($p['tags']), ENT_QUOTES);
     ?>
-    <a href="#"
-       class="proj-card"
+    <div class="proj-card"
        data-tags="<?= $tagsJson ?>"
        style="animation-delay:<?= $i * 55 ?>ms;">
 
@@ -181,13 +180,9 @@ $patterns = [
             <span class="proj-surface"><?= number_format((int)$p['surface'], 0, ',', '.') ?> m²</span>
             <span class="proj-surface-l">suprafață</span>
           <?php endif; ?>
-          <span class="proj-details" style="<?= $p['surface'] ? '' : 'margin-left:auto;' ?>">
-            Detalii
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
         </div>
       </div>
-    </a>
+    </div>
     <?php endforeach; ?>
   </div>
   <?php endif; ?>

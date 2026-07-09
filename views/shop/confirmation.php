@@ -8,7 +8,9 @@
             </svg>
         </div>
 
-        <h1 class="confirmation-title">Comandă confirmată!</h1>
+        <?php $isConfirmed = ($order['status'] ?? '') === 'confirmed'; ?>
+
+        <h1 class="confirmation-title"><?= $isConfirmed ? 'Comandă confirmată!' : 'Comandă înregistrată!' ?></h1>
         <p class="confirmation-subtitle">
             Mulțumim, <strong><?= htmlspecialchars($order['customer_name']) ?></strong>!
             Am primit comanda dumneavoastră și vă vom contacta în scurt timp.
@@ -26,7 +28,7 @@
                 </div>
                 <div class="order-meta-row">
                     <span>Status</span>
-                    <strong style="color:#27AE60;">Confirmat</strong>
+                    <strong style="color:#27AE60;"><?= $isConfirmed ? 'Confirmat' : 'În procesare' ?></strong>
                 </div>
                 <?php if ($order['customer_email']): ?>
                     <div class="order-meta-row">

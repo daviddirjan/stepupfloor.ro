@@ -2,12 +2,6 @@
    StepUp Floor — Main Stylesheet
    ========================================================================== */
 
-/* ---------- Fonts ---------- */
-@font-face { font-family:'Inter'; src:url('../fonts/inter-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('../fonts/inter-700.woff2') format('woff2'); font-weight:700; font-display:swap; }
-
 /* ---------- Tokens ---------- */
 :root {
   --color-text:        #0C0A01;
@@ -1207,3 +1201,11 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   .prd-cart-row { flex-direction:column; }
   .prd-add-btn { height:50px; }
 }
+
+/* ---------- Pagini legale ---------- */
+.legal-section { padding: 3.5rem 0 5rem; }
+.legal-container { max-width: 760px; }
+.legal-body { margin-top: 2rem; }
+.legal-body h2 { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+.legal-body p { margin-bottom: 1rem; }
+.legal-body a { color: #1D5FAA; text-decoration: underline; }

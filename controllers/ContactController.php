@@ -16,6 +16,12 @@ class ContactController
             exit;
         }
 
+        if (($_POST['csrf_token'] ?? '') !== ($_SESSION['csrf_token'] ?? '')) {
+            http_response_code(403);
+            echo 'Token invalid.';
+            exit;
+        }
+
         $name    = trim(strip_tags($_POST['name']    ?? ''));
         $phone   = trim(strip_tags($_POST['phone']   ?? ''));
         $email   = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?? '');

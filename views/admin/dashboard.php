@@ -84,7 +84,6 @@
 <div class="quick-actions">
     <a href="<?= BASE_URL ?>admin/orders/create"   class="btn-primary">+ Comandă nouă</a>
     <a href="<?= BASE_URL ?>admin/products/create" class="btn-secondary">+ Produs nou</a>
-    <a href="<?= BASE_URL ?>admin/blog/create"     class="btn-secondary">+ Articol blog</a>
     <a href="<?= BASE_URL ?>admin/contacts"        class="btn-secondary">Contacte<?= $countUnread > 0 ? ' (' . $countUnread . ')' : '' ?></a>
     <a href="<?= BASE_URL ?>admin/orders"          class="btn-secondary">Toate comenzile</a>
 </div>

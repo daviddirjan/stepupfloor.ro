@@ -1,0 +1,14 @@
+# Secrete / config local
+.env
+
+# macOS
+.DS_Store
+
+# Imagini încărcate din admin (păstrează doar structura de foldere)
+assets/images/products/*
+assets/images/projects/*
+!assets/images/products/.gitkeep
+!assets/images/projects/.gitkeep
+
+# Loguri / temporare
+*.log

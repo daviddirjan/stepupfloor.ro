@@ -11,7 +11,7 @@ class ProductModel
 
     public function getGrid(int $limit = 4): array
     {
-        $stmt = $this->db->prepare('SELECT * FROM products WHERE is_featured = 0 ORDER BY sort_order ASC LIMIT ?');
+        $stmt = $this->db->prepare('SELECT * FROM products WHERE is_featured = 1 ORDER BY sort_order ASC LIMIT ?');
         $stmt->execute([$limit]);
         return $stmt->fetchAll();
     }
@@ -134,8 +134,9 @@ class ProductModel
     {
         $stmt = $this->db->prepare(
             'INSERT INTO products (slug, name, category, category_id, price_label, heading, description, badge, image,
-             is_featured, sort_order, thickness, color, weight_per_m2, price_per_m2)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+             is_featured, sort_order, thickness, color, weight_per_m2, price_per_m2,
+             usage_class, warranty, rating, reviews_count, discount_label)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute([
             $d['slug'], $d['name'], $d['category'] ?? '', $d['category_id'] ?: null,
@@ -144,6 +145,9 @@ class ProductModel
             $d['thickness'] ?? '', $d['color'] ?? '',
             $d['weight_per_m2'] !== '' && $d['weight_per_m2'] !== null ? (float)$d['weight_per_m2'] : null,
             $d['price_per_m2'] !== '' && $d['price_per_m2'] !== null ? (float)$d['price_per_m2'] : null,
+            $d['usage_class'] ?? '', $d['warranty'] ?? '',
+            isset($d['rating']) && $d['rating'] !== '' && $d['rating'] !== null ? (float)$d['rating'] : null,
+            (int)($d['reviews_count'] ?? 0), $d['discount_label'] ?? '',
         ]);
         return (int) $this->db->lastInsertId();
     }
@@ -153,7 +157,8 @@ class ProductModel
         $stmt = $this->db->prepare(
             'UPDATE products SET slug=?, name=?, category=?, category_id=?, price_label=?, heading=?,
              description=?, badge=?, image=?, is_featured=?, sort_order=?,
-             thickness=?, color=?, weight_per_m2=?, price_per_m2=? WHERE id=?'
+             thickness=?, color=?, weight_per_m2=?, price_per_m2=?,
+             usage_class=?, warranty=?, rating=?, reviews_count=?, discount_label=? WHERE id=?'
         );
         return $stmt->execute([
             $d['slug'], $d['name'], $d['category'] ?? '', $d['category_id'] ?: null,
@@ -162,6 +167,9 @@ class ProductModel
             $d['thickness'] ?? '', $d['color'] ?? '',
             $d['weight_per_m2'] !== '' && $d['weight_per_m2'] !== null ? (float)$d['weight_per_m2'] : null,
             $d['price_per_m2'] !== '' && $d['price_per_m2'] !== null ? (float)$d['price_per_m2'] : null,
+            $d['usage_class'] ?? '', $d['warranty'] ?? '',
+            isset($d['rating']) && $d['rating'] !== '' && $d['rating'] !== null ? (float)$d['rating'] : null,
+            (int)($d['reviews_count'] ?? 0), $d['discount_label'] ?? '',
             $id,
         ]);
     }

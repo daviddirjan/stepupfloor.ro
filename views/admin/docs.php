@@ -144,7 +144,6 @@
             <li><a href="#dashboard">Dashboard — vedere de ansamblu</a></li>
             <li><a href="#categorii">Categorii</a></li>
             <li><a href="#produse">Produse</a></li>
-            <li><a href="#blog">Blog</a></li>
             <li><a href="#testimoniale">Testimoniale</a></li>
             <li><a href="#contacte">Contacte</a></li>
             <li><a href="#comenzi">Comenzi</a></li>
@@ -282,37 +281,8 @@
         La stergerea unui produs, imaginea principală și toate imaginile din galerie sunt sterse automat de pe server. Aceasta actiune este ireversibila.
     </div>
 
-    <!-- 4. Blog -->
-    <h2 id="blog">4. Blog</h2>
-    <p class="docs-section-intro">
-        Secțiunea de articole. Articolele pot fi salvate ca draft și publicate ulterior.
-        Conținutul acceptă HTML direct în câmpul "Conținut".
-    </p>
-
-    <h3>Câmpuri</h3>
-    <table class="docs-table">
-        <thead><tr><th>Câmp</th><th>Descriere</th><th>Obligatoriu</th></tr></thead>
-        <tbody>
-            <tr><td>Titlu</td><td>Titlul articolului.</td><td>Da</td></tr>
-            <tr><td>Slug</td><td>Identificator URL unic, generat automat. Odată publicat, evită modificarea slug-ului dacă articolul a fost deja distribuit — link-urile externe vor fi rupte.</td><td>Da (auto)</td></tr>
-            <tr><td>Rezumat</td><td>Text scurt folosit în listinguri și preview-uri (max recomandat: 160 caractere).</td><td>Nu</td></tr>
-            <tr><td>Continut</td><td>Corpul articolului în format HTML. Poți folosi tag-uri <code>&lt;p&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code> etc.</td><td>Da</td></tr>
-            <tr><td>Imagine cover</td><td>Imaginea principală a articolului.</td><td>Nu</td></tr>
-            <tr><td>Publicat</td><td>Bifat — articolul este vizibil public. Debifat — articolul rămâne draft, nevizibil pe site.</td><td>Nu</td></tr>
-            <tr><td>Data publicare</td><td>Completată automat cu data curentă la prima publicare. Poți seta manual o dată în format <code>YYYY-MM-DD HH:MM:SS</code>.</td><td>Nu (auto)</td></tr>
-        </tbody>
-    </table>
-
-    <h3>Flux de lucru recomandat</h3>
-    <ul>
-        <li>Creează articolul cu bifa "Publicat" debifată — se salvează ca <strong>draft</strong>.</li>
-        <li>Editează și finalizează conținutul.</li>
-        <li>Când este gata, editează articolul, bifează "Publicat" și salvează — data publicării se setează automat.</li>
-        <li>Dacă re-editezi un articol publicat, data publicării originală rămâne nemodificată.</li>
-    </ul>
-
-    <!-- 5. Testimoniale -->
-    <h2 id="testimoniale">5. Testimoniale</h2>
+    <!-- 4. Testimoniale -->
+    <h2 id="testimoniale">4. Testimoniale</h2>
     <p class="docs-section-intro">
         Recenziile clienților afișate în secțiunea de testimoniale de pe pagina principală.
     </p>
@@ -330,7 +300,7 @@
     </table>
 
     <!-- 6. Contacte -->
-    <h2 id="contacte">6. Contacte</h2>
+    <h2 id="contacte">5. Contacte</h2>
     <p class="docs-section-intro">
         Mesajele trimise prin formularul de contact de pe site. Această secțiune este <strong>doar pentru citit</strong> —
         nu poți adăuga sau edita mesaje, doar să le marchezi ca citite.
@@ -351,7 +321,7 @@
     </div>
 
     <!-- 7. Comenzi -->
-    <h2 id="comenzi">7. Comenzi</h2>
+    <h2 id="comenzi">6. Comenzi</h2>
     <p class="docs-section-intro">
         Registrul tuturor comenzilor — atât cele plasate online prin magazin (plătite cu cardul via Stripe),
         cât și cele adăugate manual (preluate telefonic sau offline).
@@ -398,7 +368,7 @@
     </div>
 
     <!-- 8. Magazin online -->
-    <h2 id="magazin">8. Magazin online &amp; coș</h2>
+    <h2 id="magazin">7. Magazin online &amp; coș</h2>
     <p class="docs-section-intro">
         Sistemul de magazin permite clienților să navigheze produsele, să le adauge în coș
         și să finalizeze comanda cu plata online prin card. Nu necesită cont de client.
@@ -449,7 +419,7 @@
     </p>
 
     <!-- 9. Setări -->
-    <h2 id="setari">9. Setări — Stripe &amp; plăți</h2>
+    <h2 id="setari">8. Setări — Stripe &amp; plăți</h2>
     <p class="docs-section-intro">
         Pagina de Setări (<a href="<?= BASE_URL ?>admin/settings">Admin → Setări</a>) permite configurarea
         integrării Stripe direct din interfață, fără a edita fișiere de pe server.
@@ -511,7 +481,7 @@
     </p>
 
     <!-- 10. Securitate -->
-    <h2 id="securitate">10. Securitate si acces</h2>
+    <h2 id="securitate">9. Securitate si acces</h2>
 
     <h3>Autentificarea</h3>
     <p>
@@ -545,7 +515,7 @@
     </p>
 
     <!-- 11. Imagini -->
-    <h2 id="imagini">11. Reguli pentru imagini</h2>
+    <h2 id="imagini">10. Reguli pentru imagini</h2>
 
     <table class="docs-table">
         <thead><tr><th>Regula</th><th>Detaliu</th></tr></thead>
@@ -553,7 +523,6 @@
             <tr><td>Formate acceptate</td><td>JPEG, PNG, WebP</td></tr>
             <tr><td>Dimensiune maxima</td><td>3 MB per imagine</td></tr>
             <tr><td>Stocare produse</td><td><code>assets/images/products/</code> — atât imaginea principală cât și galeria</td></tr>
-            <tr><td>Stocare blog</td><td><code>assets/images/blog/</code></td></tr>
             <tr><td>Denumire fisier</td><td>Generată automat (ex: <code>img_6849a3f2b1c4d.jpg</code>). Nu păstrează numele original al fișierului.</td></tr>
             <tr><td>Stergere automata</td><td>Când ștergi un produs, imaginea principală și toate imaginile din galerie sunt șterse automat. La ștergerea unui articol, imaginea cover este ștearsă.</td></tr>
             <tr><td>Inlocuire imagine principala</td><td>Dacă încarci o imagine nouă la editare, imaginea veche este ștearsă automat și înlocuită.</td></tr>

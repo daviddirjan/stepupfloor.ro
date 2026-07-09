@@ -28,7 +28,6 @@ class AdminDashboardController
             'pageTitle'      => 'Dashboard',
             'countProducts'  => (int) $db->query('SELECT COUNT(*) FROM products')->fetchColumn(),
             'countCategories'=> (int) $db->query('SELECT COUNT(*) FROM categories')->fetchColumn(),
-            'countBlog'      => (int) $db->query('SELECT COUNT(*) FROM blog_posts WHERE is_published = 1')->fetchColumn(),
             'countUnread'    => (int) $db->query('SELECT COUNT(*) FROM contact_submissions WHERE is_read = 0')->fetchColumn(),
             'countContacts'  => $totalContacts,
             'totalVisitors'  => $totalVisitors,

@@ -9,6 +9,7 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
+require BASE_PATH . '/config/env.php';
 require BASE_PATH . '/config/database.php';
 require BASE_PATH . '/config/admin.php';
 require BASE_PATH . '/config/stripe.php';
@@ -73,7 +74,6 @@ switch ($segment) {
             'dashboard'    => (new AdminDashboardController())->index(),
             'categories'   => (new AdminCategoryController())->dispatch($parts),
             'products'     => (new AdminProductController())->dispatch($parts),
-            'blog'         => (new AdminBlogController())->dispatch($parts),
             'projects'     => (new AdminProjectController())->dispatch($parts),
             'testimonials' => (new AdminTestimonialController())->dispatch($parts),
             'contacts'     => (new AdminContactController())->dispatch($parts),
@@ -101,6 +101,12 @@ switch ($segment) {
 
     case 'proiecte':
         (new ProjectController())->index();
+        break;
+
+    case 'politica-de-confidentialitate':
+    case 'termeni-si-conditii':
+    case 'cookies':
+        (new LegalController())->show($segment);
         break;
 
     case 'magazin':

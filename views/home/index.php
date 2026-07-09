@@ -137,7 +137,7 @@
     </div>
 
     <div class="center-btn">
-      <a href="<?= BASE_URL ?>produse" class="btn-secondary">Vezi toate produsele</a>
+      <a href="<?= BASE_URL ?>magazin" class="btn-secondary">Vezi toate produsele</a>
     </div>
   </div>
 </section>
@@ -227,6 +227,7 @@
       <div class="contact-form-wrap">
         <h3 class="form-title">Trimite un mesaj</h3>
         <form method="POST" action="<?= BASE_URL ?>contact/submit" class="contact-form" novalidate>
+          <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nume</label>

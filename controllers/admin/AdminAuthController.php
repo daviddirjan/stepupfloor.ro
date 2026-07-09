@@ -23,6 +23,12 @@ class AdminAuthController
 
     public function logout(): void
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST'
+            || ($_POST['csrf_token'] ?? '') !== ($_SESSION['csrf_token'] ?? '')) {
+            header('Location: ' . BASE_URL . 'admin/dashboard');
+            exit;
+        }
+
         session_destroy();
         header('Location: ' . BASE_URL . 'admin/login');
         exit;

@@ -52,16 +52,6 @@ CREATE TABLE IF NOT EXISTS orders (
   INDEX idx_created (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 7. Blog posts table
-CREATE TABLE IF NOT EXISTS blog_posts (
-  id           INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  title        VARCHAR(200) NOT NULL,
-  slug         VARCHAR(200) NOT NULL UNIQUE,
-  excerpt      TEXT         NOT NULL,
-  body         LONGTEXT     NOT NULL,
-  image        VARCHAR(255) NOT NULL DEFAULT '',
-  published_at DATETIME     NULL,
-  is_published TINYINT(1)   NOT NULL DEFAULT 0,
-  created_at   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- Nota: funcționalitatea Blog a fost eliminată (nu avea pagină publică).
+-- Pentru bazele de date existente, tabelul se poate șterge manual cu:
+--   DROP TABLE IF EXISTS blog_posts;
