@@ -32,15 +32,15 @@ $steps = [
   <div style="position:absolute;top:-160px;right:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.22) 0%,transparent 68%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:-120px;left:30%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.10) 0%,transparent 68%);pointer-events:none;"></div>
 
-  <div style="max-width:1320px;margin:0 auto;padding:80px 48px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;">
+  <div class="svc-hero">
     <div style="animation:fadeUp 0.6s ease both;">
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(29,95,170,0.18);border:1px solid rgba(29,95,170,0.35);border-radius:20px;padding:5px 14px;margin-bottom:24px;">
         <div style="width:7px;height:7px;border-radius:50%;background:#4d8fd4;"></div>
         <span style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#4d8fd4;text-transform:uppercase;">Serviciu</span>
       </div>
-      <h1 style="font-family:'DM Serif Display',serif;font-size:58px;color:#fff;line-height:1.1;margin-bottom:22px;">Întreținere profesională<br>a pardoselilor</h1>
+      <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(34px,6vw,58px);color:#fff;line-height:1.1;margin-bottom:22px;">Întreținere profesională<br>a pardoselilor</h1>
       <p style="font-size:16px;color:oklch(0.67 0.04 230);line-height:1.75;max-width:480px;margin-bottom:36px;">
-        Prelungim viața pardoselilor tale cu programe de întreținere periodică. Curățenie profundă, recondiționare și tratamente de protecție adaptate fiecărui tip de material.
+        O întreținere adecvată este soluția pentru menținerea unui aspect impecabil și prelungirea duratei de viață a covorului PVC sau a mochetei tale. De la curățarea periodică la protecția împotriva uzurii premature, avem grijă de pardoseala ta în fiecare detaliu.
       </p>
       <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
         <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#1D5FAA;color:#fff;font-size:14px;font-weight:600;text-decoration:none;border-radius:10px;letter-spacing:.03em;">
@@ -53,7 +53,7 @@ $steps = [
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeUp 0.6s 0.12s ease both;">
+    <div class="svc-hero-stats" style="animation:fadeUp 0.6s 0.12s ease both;">
       <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 24px;backdrop-filter:blur(8px);">
         <div style="font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1;margin-bottom:8px;">4h</div>
         <div style="font-size:12px;color:oklch(0.58 0.04 230);line-height:1.5;letter-spacing:.03em;">Timp maxim de răspuns la sesizare</div>
@@ -75,52 +75,52 @@ $steps = [
 </div>
 
 <!-- CE ÎNTREȚINEM -->
-<div style="background:#fff;padding:80px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
+<div class="svc-section" style="background:#fff;">
+  <div class="svc-container">
     <div style="text-align:center;margin-bottom:56px;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:12px;">Ce întreținem</div>
-      <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;">Orice tip de pardoseală</h2>
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:12px;">Ce facem</div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;">Servicii complete de întreținere</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+    <div class="svc-grid-4">
 
       <div class="svc-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:14px;overflow:hidden;transition:box-shadow .22s,transform .22s;cursor:pointer;">
-        <div style="height:170px;background:repeating-linear-gradient(45deg,#c9c3ba 0px,#c9c3ba 6px,#e8e4de 6px,#e8e4de 22px);display:flex;align-items:center;justify-content:center;position:relative;">
-          <div style="background:rgba(255,255,255,0.7);border-radius:6px;padding:4px 11px;font-size:9px;font-family:monospace;color:#666;">foto mochete</div>
-          <div style="position:absolute;top:12px;left:12px;background:#0F2443;color:#fff;font-size:9px;font-weight:700;letter-spacing:.1em;padding:3px 9px;border-radius:20px;text-transform:uppercase;">Popular</div>
+        <div style="height:170px;position:relative;overflow:hidden;">
+          <img src="<?= BASE_URL ?>assets/images/servicii-intretinere/mochete.png" alt="Mochete" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;top:12px;left:12px;background:#0F2443;color:#fff;font-size:9px;font-weight:700;letter-spacing:.1em;padding:3px 9px;border-radius:20px;text-transform:uppercase;">Recomandat</div>
         </div>
         <div style="padding:20px;">
-          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Mochete</div>
-          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Curățenie profundă, extracție umezeală, tratament anti-acarieni și deodorizare.</div>
+          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Detergenți profesionali</div>
+          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Soluții de curățare care păstrează strălucirea și culoarea inițială, elimină eficient murdăria și petele, fără a afecta calitatea sau textura materialului.</div>
         </div>
       </div>
 
       <div class="svc-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:14px;overflow:hidden;transition:box-shadow .22s,transform .22s;cursor:pointer;">
-        <div style="height:170px;background:repeating-linear-gradient(0deg,#b8a890 0px,#b8a890 4px,#d4c8b4 4px,#d4c8b4 18px);display:flex;align-items:center;justify-content:center;">
-          <div style="background:rgba(255,255,255,0.7);border-radius:6px;padding:4px 11px;font-size:9px;font-family:monospace;color:#666;">foto LVT</div>
+        <div style="height:170px;overflow:hidden;">
+          <img src="<?= BASE_URL ?>assets/images/servicii-intretinere/lvt.png" alt="LVT" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:20px;">
-          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">LVT & Vinil</div>
-          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Decapare strat vechi de ceară, curățenie mecanică și aplicare tratament de protecție.</div>
+          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Curățire profesională</div>
+          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Tehnici specializate și echipamente de top care revitalizează și păstrează frumusețea pardoselii în fiecare detaliu.</div>
         </div>
       </div>
 
       <div class="svc-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:14px;overflow:hidden;transition:box-shadow .22s,transform .22s;cursor:pointer;">
-        <div style="height:170px;background:repeating-linear-gradient(90deg,#8a8e96 0px,#8a8e96 5px,#b0b4bc 5px,#b0b4bc 20px);display:flex;align-items:center;justify-content:center;">
-          <div style="background:rgba(255,255,255,0.7);border-radius:6px;padding:4px 11px;font-size:9px;font-family:monospace;color:#666;">foto dale</div>
+        <div style="height:170px;overflow:hidden;">
+          <img src="<?= BASE_URL ?>assets/images/servicii-intretinere/dale.png" alt="Dale Modulare" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:20px;">
-          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Dale Modulare</div>
-          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Înlocuire dale deteriorate, curățenie rosturilor și recondiționare suprafață.</div>
+          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Decapare</div>
+          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Înlăturăm stratul superior cu soluții chimice sau instrumente mecanice specializate, pregătind o bază curată pentru următorul tratament sau finisare.</div>
         </div>
       </div>
 
       <div class="svc-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:14px;overflow:hidden;transition:box-shadow .22s,transform .22s;cursor:pointer;">
-        <div style="height:170px;background:repeating-linear-gradient(135deg,#a0a4aa 0px,#a0a4aa 4px,#c4c8ce 4px,#c4c8ce 16px);display:flex;align-items:center;justify-content:center;">
-          <div style="background:rgba(255,255,255,0.7);border-radius:6px;padding:4px 11px;font-size:9px;font-family:monospace;color:#666;">foto covoare PVC</div>
+        <div style="height:170px;overflow:hidden;">
+          <img src="<?= BASE_URL ?>assets/images/servicii-intretinere/covoare-pvc.png" alt="Covoare PVC" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:20px;">
-          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Covoare PVC</div>
-          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Curățenie mecanică, reparare rosturi și suduri, aplicare strat de protecție.</div>
+          <div style="font-size:16px;font-weight:700;color:#0F2443;margin-bottom:7px;">Aplicare strat nou de uzură</div>
+          <div style="font-size:13px;color:oklch(0.50 0.03 240);line-height:1.6;">Aplicăm un nou strat protector care aduce rezistență sporită la uzură și protecție împotriva factorilor de mediu, pentru un aspect impecabil mai mult timp.</div>
         </div>
       </div>
 
@@ -129,11 +129,11 @@ $steps = [
 </div>
 
 <!-- PROCESUL NOSTRU -->
-<div id="proces" style="background:#f4f1ec;padding:88px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:340px 1fr;gap:80px;align-items:start;">
+<div id="proces" class="svc-section" style="background:#f4f1ec;">
+  <div class="svc-container">
+    <div class="svc-process-grid">
 
-      <div style="position:sticky;top:108px;">
+      <div class="svc-process-sticky" style="position:sticky;top:108px;">
         <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:14px;">Cum lucrăm</div>
         <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;margin-bottom:20px;">Procesul nostru pas cu pas</h2>
         <p style="font-size:14px;color:oklch(0.48 0.03 240);line-height:1.75;">Intervenții planificate, minimă perturbare a activității tale. Știi mereu ce urmează și când.</p>
@@ -163,13 +163,13 @@ $steps = [
 </div>
 
 <!-- AVANTAJE -->
-<div style="background:#0F2443;padding:80px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
+<div class="svc-section" style="background:#0F2443;">
+  <div class="svc-container">
     <div style="text-align:center;margin-bottom:52px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#4d8fd4;text-transform:uppercase;margin-bottom:12px;">De ce noi</div>
       <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#fff;line-height:1.2;">Întreținere fără compromisuri</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div class="svc-grid-3">
 
       <div class="svc-adv-card" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:16px;padding:32px;transition:background .2s;">
         <div style="width:48px;height:48px;background:rgba(29,95,170,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
@@ -224,15 +224,15 @@ $steps = [
 </div>
 
 <!-- TARIFARE -->
-<div style="background:#fff;padding:80px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
+<div class="svc-section" style="background:#fff;">
+  <div class="svc-container">
     <div style="text-align:center;margin-bottom:52px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:12px;">Prețuri orientative</div>
       <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;margin-bottom:14px;">Tarife întreținere</h2>
       <p style="font-size:15px;color:oklch(0.50 0.03 240);max-width:500px;margin:0 auto;line-height:1.7;">Prețul final depinde de suprafață, tip pardoseală și frecvență. Cere o ofertă personalizată. E gratuită și vine în 24h.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:0 auto;">
+    <div class="svc-grid-3" style="max-width:960px;margin:0 auto;">
 
       <div class="svc-price-card" style="border:1.5px solid oklch(0.91 0.01 240);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;transition:box-shadow .2s;">
         <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.52 0.03 240);margin-bottom:10px;">Curățenie de bază</div>
@@ -289,8 +289,8 @@ $steps = [
 </div>
 
 <!-- CTA CONTACT -->
-<div id="contact" style="background:#f4f1ec;padding:88px 48px;">
-  <div style="max-width:900px;margin:0 auto;background:#0F2443;border-radius:24px;padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;">
+<div id="contact" class="svc-section" style="background:#f4f1ec;">
+  <div class="svc-cta-box" style="background:#0F2443;border-radius:24px;position:relative;overflow:hidden;">
     <div style="position:absolute;top:-80px;right:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.25) 0%,transparent 70%);pointer-events:none;"></div>
     <div style="position:relative;z-index:1;">
       <div style="font-family:'DM Serif Display',serif;font-size:34px;color:#fff;line-height:1.25;margin-bottom:16px;">Hai să discutăm programul tău de întreținere</div>

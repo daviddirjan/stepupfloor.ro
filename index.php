@@ -83,7 +83,7 @@ switch ($segment) {
                 default => (new AdminSettingsController())->index(),
             },
             'docs'         => (new AdminDocsController())->index(),
-            default        => (function () { http_response_code(404); echo '<h1>404</h1>'; })(),
+            default        => (new ErrorController())->notFound(),
         };
         break;
 
@@ -95,7 +95,7 @@ switch ($segment) {
         match ($parts[1] ?? '') {
             'montaj'      => (new ServiceController())->montaj(),
             'intretinere' => (new ServiceController())->intretinere(),
-            default       => (function () { http_response_code(404); echo '<h1>404</h1>'; })(),
+            default       => (new ErrorController())->notFound(),
         };
         break;
 
@@ -143,7 +143,6 @@ switch ($segment) {
         break;
 
     default:
-        http_response_code(404);
-        echo '<h1>404 — Pagina nu a fost găsită</h1>';
+        (new ErrorController())->notFound();
         break;
 }

@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="hero-img-cell">
-      <div class="img-placeholder"></div>
+      <video src="<?= BASE_URL ?>assets/images/hero/hero-loop.mp4" autoplay muted loop playsinline></video>
       <div class="hero-accent-bar"></div>
     </div>
   </div>
@@ -71,7 +71,7 @@
           </div>
           <div class="feat-card">
             <div class="accent-bar"></div>
-            <h3>8 județe</h3>
+            <h3>3 județe</h3>
             <p>Acoperim vestul României cu aceeași atenție.</p>
           </div>
         </div>
@@ -107,7 +107,9 @@
             <a href="<?= BASE_URL ?>servicii/<?= htmlspecialchars($service['slug']) ?>" class="btn-link">Detalii <span>→</span></a>
           </div>
         </div>
-        <div class="service-img img-placeholder"></div>
+        <div class="service-img">
+          <img src="<?= BASE_URL ?>assets/images/services/<?= htmlspecialchars($service['slug']) ?>.png" alt="<?= htmlspecialchars($service['title']) ?>" loading="lazy">
+        </div>
       </div>
     </div>
     <?php endforeach; ?>
@@ -161,7 +163,9 @@
           <p class="tcard-text">"<?= htmlspecialchars($t['review_text']) ?>"</p>
         </div>
         <div class="tcard-author">
-          <div class="author-avatar"></div>
+          <div class="author-avatar">
+            <img src="<?= BASE_URL ?>assets/images/testimonials/<?= strtolower(explode(' ', $t['name'])[0]) ?>.png" alt="<?= htmlspecialchars($t['name']) ?>" loading="lazy">
+          </div>
           <div>
             <p class="author-name"><?= htmlspecialchars($t['name']) ?></p>
             <p class="author-role"><?= htmlspecialchars($t['location']) ?></p>

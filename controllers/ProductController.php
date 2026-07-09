@@ -6,8 +6,7 @@ class ProductController
     {
         $product = (new ProductModel())->findBySlug($slug);
         if (!$product) {
-            http_response_code(404);
-            echo '<h1>404 — Produsul nu a fost găsit</h1>';
+            (new ErrorController())->notFound();
             return;
         }
 

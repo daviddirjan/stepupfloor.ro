@@ -9,8 +9,7 @@ class CategoryController
 
         $category = $categoryModel->findBySlug($slug);
         if (!$category) {
-            http_response_code(404);
-            echo '<h1>404 — Categoria nu există</h1>';
+            (new ErrorController())->notFound();
             return;
         }
 

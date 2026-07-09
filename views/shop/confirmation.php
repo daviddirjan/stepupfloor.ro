@@ -52,9 +52,9 @@
                         <?php foreach ($order['items'] as $item): ?>
                             <tr>
                                 <td><?= htmlspecialchars($item['product_name']) ?></td>
-                                <td><?= htmlspecialchars($item['area_m2']) ?></td>
-                                <td><?= number_format((float)$item['price_per_m2'], 2, ',', '.') ?> lei</td>
-                                <td><?= number_format((float)$item['total_price'], 2, ',', '.') ?> lei</td>
+                                <td data-label="m²"><?= htmlspecialchars($item['area_m2']) ?></td>
+                                <td data-label="Preț/m²"><?= number_format((float)$item['price_per_m2'], 2, ',', '.') ?> lei</td>
+                                <td data-label="Total"><?= number_format((float)$item['total_price'], 2, ',', '.') ?> lei</td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

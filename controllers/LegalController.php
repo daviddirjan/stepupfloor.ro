@@ -11,8 +11,7 @@ class LegalController
     public function show(string $slug): void
     {
         if (!isset(self::PAGES[$slug])) {
-            http_response_code(404);
-            echo '<h1>404 — Pagina nu a fost găsită</h1>';
+            (new ErrorController())->notFound();
             return;
         }
 

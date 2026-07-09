@@ -77,8 +77,8 @@
                         <?php foreach ($items as $item): ?>
                             <tr>
                                 <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td><?= htmlspecialchars($item['quantity_m2']) ?></td>
-                                <td><?= number_format($item['quantity_m2'] * $item['price_per_m2'], 2, ',', '.') ?> lei</td>
+                                <td data-label="m²"><?= htmlspecialchars($item['quantity_m2']) ?></td>
+                                <td data-label="Total"><?= number_format($item['quantity_m2'] * $item['price_per_m2'], 2, ',', '.') ?> lei</td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

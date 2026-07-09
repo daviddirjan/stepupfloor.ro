@@ -56,7 +56,7 @@
             <div class="mega-cards mega-cards--2">
               <a href="<?= BASE_URL ?>servicii/montaj" class="mega-card">
                 <div class="mega-card-img mega-card-img--light">
-                  <div class="mega-card-img-label">fotografie montaj</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/montaj.png" alt="Montaj" loading="lazy">
                   <span class="mega-card-badge">Serviciu</span>
                 </div>
                 <div class="mega-card-body">
@@ -66,7 +66,7 @@
               </a>
               <a href="<?= BASE_URL ?>servicii/intretinere" class="mega-card">
                 <div class="mega-card-img mega-card-img--light2">
-                  <div class="mega-card-img-label">fotografie întreținere</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/intretinere.png" alt="Întreținere" loading="lazy">
                   <span class="mega-card-badge">Serviciu</span>
                 </div>
                 <div class="mega-card-body">
@@ -98,9 +98,9 @@
               </a>
             </div>
             <div class="mega-cards mega-cards--4">
-              <a href="<?= BASE_URL ?>categorie/mochete" class="mega-card mega-card--dark">
+              <a href="<?= BASE_URL ?>categorie/mocheta" class="mega-card mega-card--dark">
                 <div class="mega-card-img mega-card-img--dark1">
-                  <div class="mega-card-img-label mega-card-img-label--dark">fotografie mochete</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/mochete.png" alt="Mochete" loading="lazy">
                   <span class="mega-card-badge mega-card-badge--top">Popular</span>
                 </div>
                 <div class="mega-card-body">
@@ -108,27 +108,27 @@
                   <p class="mega-card-desc mega-card-desc--light">Mochete de birou și rezidențiale</p>
                 </div>
               </a>
-              <a href="<?= BASE_URL ?>categorie/lvt" class="mega-card mega-card--dark">
+              <a href="<?= BASE_URL ?>categorie/spc" class="mega-card mega-card--dark">
                 <div class="mega-card-img mega-card-img--dark2">
-                  <div class="mega-card-img-label mega-card-img-label--dark">fotografie LVT</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/lvt.png" alt="LVT" loading="lazy">
                 </div>
                 <div class="mega-card-body">
                   <p class="mega-card-title mega-card-title--light">LVT</p>
                   <p class="mega-card-desc mega-card-desc--light">Luxury vinyl tile durabil</p>
                 </div>
               </a>
-              <a href="<?= BASE_URL ?>categorie/covoare-pvc" class="mega-card mega-card--dark">
+              <a href="<?= BASE_URL ?>categorie/covor-pvc" class="mega-card mega-card--dark">
                 <div class="mega-card-img mega-card-img--dark3">
-                  <div class="mega-card-img-label mega-card-img-label--dark">fotografie covoare PVC</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/covoare-pvc.png" alt="Covoare PVC" loading="lazy">
                 </div>
                 <div class="mega-card-body">
                   <p class="mega-card-title mega-card-title--light">Covoare PVC</p>
                   <p class="mega-card-desc mega-card-desc--light">Soluție practică și estetică</p>
                 </div>
               </a>
-              <a href="<?= BASE_URL ?>categorie/dale-modulare" class="mega-card mega-card--dark">
+              <a href="<?= BASE_URL ?>magazin" class="mega-card mega-card--dark">
                 <div class="mega-card-img mega-card-img--dark4">
-                  <div class="mega-card-img-label mega-card-img-label--dark">fotografie dale</div>
+                  <img src="<?= BASE_URL ?>assets/images/megamenu/dale.png" alt="Dale Modulare" loading="lazy">
                 </div>
                 <div class="mega-card-body">
                   <p class="mega-card-title mega-card-title--light">Dale Modulare</p>
@@ -163,14 +163,27 @@
       </a>
     </div>
 
-    <!-- MOBILE TOGGLE -->
-    <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Meniu">
-      <span></span><span></span><span></span>
-    </button>
+    <!-- MOBILE ACTIONS (coș mereu vizibil + hamburger) -->
+    <div class="hdr-mobile-actions">
+      <a href="<?= BASE_URL ?>cos" class="hdr-icon-btn hdr-cart-btn" aria-label="Coș">
+        <svg viewBox="0 0 18 18" fill="none" width="18" height="18"><path d="M1 1h2.5l1.6 8h8.3l1.6-5.5H4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="15.5" r="1.25" fill="currentColor"/><circle cx="12.5" cy="15.5" r="1.25" fill="currentColor"/></svg>
+        <span class="hdr-cart-badge"><?= CartHelper::count() ?: '' ?></span>
+      </a>
+      <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Meniu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu">
+    <form class="mobile-search" action="<?= BASE_URL ?>magazin" method="get" role="search">
+      <input type="text" name="q" class="mobile-search-input" placeholder="Caută produse...">
+      <button type="submit" class="mobile-search-btn" aria-label="Căutare">
+        <svg viewBox="0 0 18 18" fill="none" width="17" height="17"><circle cx="7.5" cy="7.5" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11.5 11.5l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+
     <a href="<?= BASE_URL ?>despre-noi" class="nav-link">Despre Noi</a>
 
     <div class="mobile-item">
@@ -193,14 +206,18 @@
       </button>
       <div class="mobile-sub">
         <a href="<?= BASE_URL ?>magazin"                   class="mobile-sub-link" onclick="closeMobileMenu()">Toate produsele</a>
-        <a href="<?= BASE_URL ?>categorie/mochete"         class="mobile-sub-link" onclick="closeMobileMenu()">Mochete</a>
-        <a href="<?= BASE_URL ?>categorie/lvt"             class="mobile-sub-link" onclick="closeMobileMenu()">LVT</a>
-        <a href="<?= BASE_URL ?>categorie/covoare-pvc"     class="mobile-sub-link" onclick="closeMobileMenu()">Covoare PVC</a>
-        <a href="<?= BASE_URL ?>categorie/dale-modulare"   class="mobile-sub-link" onclick="closeMobileMenu()">Dale Modulare</a>
+        <a href="<?= BASE_URL ?>categorie/mocheta"         class="mobile-sub-link" onclick="closeMobileMenu()">Mochete</a>
+        <a href="<?= BASE_URL ?>categorie/spc"             class="mobile-sub-link" onclick="closeMobileMenu()">LVT</a>
+        <a href="<?= BASE_URL ?>categorie/covor-pvc"       class="mobile-sub-link" onclick="closeMobileMenu()">Covoare PVC</a>
+        <a href="<?= BASE_URL ?>magazin"                   class="mobile-sub-link" onclick="closeMobileMenu()">Dale Modulare</a>
       </div>
     </div>
 
     <a href="<?= BASE_URL ?>#contact" class="btn-primary" style="justify-content:center;" onclick="closeMobileMenu()">Solicită ofertă</a>
+    <a href="tel:+40745990503" class="mobile-call" onclick="closeMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      Sună acum: 0745 990 503
+    </a>
   </div>
 </header>
 
@@ -219,6 +236,7 @@
           <a href="tel:+40745456008" class="footer-contact-link">0745 456 008</a>
           <a href="mailto:office@stepupsolutions.ro" class="footer-contact-link">office@stepupsolutions.ro</a>
           <span class="footer-address">Strada Aristide Demetriade 9, 300072 Timișoara</span>
+          <span class="footer-address">CUI 42466520 · Nr. Reg. Com. J2020000968359</span>
         </div>
         <div class="footer-social">
           <a href="#" class="social-link" aria-label="Facebook">
@@ -260,6 +278,9 @@
     <div class="footer-bottom">
       <p class="footer-copy">&copy; <?= date('Y') ?> Montaj Mochete &amp; Covoare. Toate drepturile rezervate.</p>
       <div class="footer-legal">
+        <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">ANPC</a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener nofollow">ANPC – SOL</a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">ANPC – SAL</a>
         <a href="<?= BASE_URL ?>politica-de-confidentialitate">Politica de confidențialitate</a>
         <a href="<?= BASE_URL ?>termeni-si-conditii">Termeni și condiții</a>
         <a href="<?= BASE_URL ?>cookies">Cookies</a>

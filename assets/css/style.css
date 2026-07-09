@@ -26,9 +26,16 @@
 }
 
 /* ---------- Reset ---------- */
+/* Breakpoint convention (single source of truth):
+   - 1024px  → tabletă landscape / desktop mic: nav → mobil, grid-uri mari colapsează
+   - 768px   → tabletă portret: majoritatea grid-urilor multi-col → 1–2 col
+   - 560px   → telefon: totul → 1 col, padding redus, tipografie mai mică          */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html  { scroll-behavior: smooth; }
 body  { font-family: var(--font-body); font-size: 16px; color: var(--color-text); background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.5; }
+/* Plasă de siguranță anti-overflow orizontal pe mobil */
+html, body { overflow-x: hidden; }
+img, video, table, iframe { max-width: 100%; }
 img   { max-width: 100%; display: block; }
 a     { text-decoration: none; }
 ul    { list-style: none; }
@@ -254,7 +261,9 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
+.mega-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mega-cards--4 .mega-card-img { height: 160px; }
 .mega-card-img--light  { background: repeating-linear-gradient(45deg,  #e2dfd8 0,#e2dfd8 4px,#ece9e3 4px,#ece9e3 20px); }
 .mega-card-img--light2 { background: repeating-linear-gradient(135deg, #e2dfd8 0,#e2dfd8 4px,#ece9e3 4px,#ece9e3 20px); }
@@ -363,6 +372,9 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 }
 .hdr-cta:hover { background: #163e7a; transform: translateY(-1px); }
 
+/* Mobile actions bar (coș + hamburger) — vizibilă doar pe mobil */
+.hdr-mobile-actions { display: none; align-items: center; gap: 2px; margin-left: auto; }
+
 /* Mobile toggle */
 .mobile-toggle {
   display: none;
@@ -372,9 +384,16 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   padding: 0.5rem;
   flex-direction: column;
   gap: 5px;
-  margin-left: auto;
 }
 .mobile-toggle span { display: block; width: 24px; height: 2px; background: #0F2443; }
+
+/* Search în meniul mobil */
+.mobile-search { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;
+  border: 1.5px solid oklch(0.90 0.01 240); border-radius: 8px; padding: 4px 4px 4px 12px; }
+.mobile-search-input { flex: 1; border: none; outline: none; background: none;
+  font-family: 'DM Sans', var(--font-ui), sans-serif; font-size: 0.9375rem; color: #0F2443; padding: 8px 0; }
+.mobile-search-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background: #1D5FAA; border: none; border-radius: 6px; color: #fff; cursor: pointer; flex-shrink: 0; }
 
 /* Mobile menu */
 .mobile-menu {
@@ -425,9 +444,15 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 }
 .mobile-sub-link:hover { color: #1D5FAA; }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Link „sună acum" în meniul mobil */
+.mobile-call { display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 0.5rem; padding: 0.75rem; color: #1D5FAA; font-family: 'DM Sans', var(--font-ui), sans-serif;
+  font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.03em; }
+
+/* Responsive header — trece pe mobil la 1024px (aliniat cu conținutul) */
+@media (max-width: 1024px) {
   .hdr-nav, .hdr-actions { display: none; }
+  .hdr-mobile-actions { display: flex; }
   .mobile-toggle { display: flex; }
   .topbar { display: none; }
 }
@@ -447,8 +472,8 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   justify-content: center; gap: 1.5rem;
 }
 .hero-sub { font-size: 1.125rem; color: var(--color-muted); line-height: 1.6; max-width: 32rem; }
-.hero-img-cell { min-height: 480px; position: relative; overflow: hidden; }
-.hero-img-cell img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.hero-img-cell { min-height: 432px; position: relative; overflow: hidden; }
+.hero-img-cell img, .hero-img-cell video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .hero-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--color-primary); }
 
 /* Stats strip */
@@ -570,7 +595,8 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 .stars { color: var(--color-text); font-size: 1rem; margin-bottom: 1.25rem; }
 .tcard-text { font-size: 1.0625rem; line-height: 1.7; color: var(--color-text); }
 .tcard-author { display: flex; align-items: center; gap: 0.875rem; padding-top: 1rem; border-top: 1px solid rgba(12,10,1,0.10); }
-.author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-placeholder); flex-shrink: 0; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-placeholder); flex-shrink: 0; overflow: hidden; }
+.author-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .author-name { font-size: 0.9375rem; font-weight: 700; }
 .author-role { font-size: 0.875rem; color: var(--color-muted); }
 
@@ -642,42 +668,97 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 .footer-legal a:hover { color: rgba(255,255,255,0.8); }
 
 /* ================================================================
-   RESPONSIVE
+   RESPONSIVE — breakpoints unice: 1024 / 768 / 560
    ================================================================ */
-@media (max-width: 991px) {
-  .desktop-nav, .desktop-actions { display: none !important; }
-  .mobile-toggle { display: flex !important; }
-
-  .hero-grid       { grid-template-columns: 1fr !important; }
-  .hero-img-cell   { min-height: 240px !important; }
-  .stats-strip     { grid-template-columns: 1fr 1fr !important; }
+@media (max-width: 1024px) {
+  .hero-grid       { grid-template-columns: 1fr; }
+  .hero-img-cell   { min-height: 280px; }
+  .stats-strip     { grid-template-columns: 1fr 1fr; }
   .stat-cell:nth-child(2n) { border-right: none; }
   .stat-cell:nth-child(n+3) { border-top: 1px solid var(--color-border); }
 
-  .intro-grid      { grid-template-columns: 1fr !important; gap: 3rem !important; }
-  .feat-card-2x2   { grid-template-columns: 1fr 1fr; }
+  .intro-grid      { grid-template-columns: 1fr; gap: 3rem; }
 
-  .service-body-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .service-body-grid { grid-template-columns: 1fr; gap: 2rem; }
 
-  .products-split   { grid-template-columns: minmax(0, 1fr) !important; }
-  .product-grid     { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; }
+  .products-split   { grid-template-columns: minmax(0, 1fr); }
+  .product-grid     { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 
-  .testimonials-grid { grid-template-columns: 1fr !important; }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
   .testimonials-sub  { text-align: left; }
 
-  .contact-grid    { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .contact-grid    { grid-template-columns: 1fr; gap: 2rem; }
 
-  .footer-grid     { grid-template-columns: 1fr !important; gap: 3rem !important; }
+  .footer-grid     { grid-template-columns: 1fr; gap: 3rem; }
   .footer-bottom   { flex-direction: column; align-items: flex-start; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .intro-section, .products-section, .testimonials-section,
+  .contact-section, .services-section { padding-top: 4rem; padding-bottom: 4rem; }
+  .intro-section   { padding-top: 4rem; padding-bottom: 4rem; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-section    { padding-top: 2.5rem; }
+  .hero-content    { padding: 2.5rem 2rem; }
+}
+
+@media (max-width: 560px) {
   .feat-card-2x2   { grid-template-columns: 1fr; }
-  .product-grid    { grid-template-columns: minmax(0, 1fr) !important; }
+  .product-grid    { grid-template-columns: minmax(0, 1fr); }
   .form-row        { grid-template-columns: 1fr; }
-  .stats-strip     { grid-template-columns: 1fr 1fr !important; }
+  .stats-strip     { grid-template-columns: 1fr; }
+  .stat-cell:nth-child(n+2) { border-top: 1px solid var(--color-border); }
   .hero-content    { padding: 2rem 1.5rem; }
+  .hero-img-cell   { min-height: 220px; }
   .contact-form-wrap { padding: 1.5rem; }
+}
+
+/* ==========================================================================
+   SERVICII (montaj / întreținere) & DESPRE-NOI
+   Clase pentru layout-urile extrase din stilurile inline. Fiecare secțiune
+   folosește .svc-section (padding) + .svc-container (lățime), iar grid-urile
+   colapsează la breakpoint-urile 1024 / 768 / 560.
+   ========================================================================== */
+.svc-section    { padding: 80px 48px; }
+.svc-container  { max-width: 1320px; margin: 0 auto; }
+.svc-hero       { max-width: 1320px; margin: 0 auto; padding: 80px 48px; position: relative;
+                  z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+                  align-items: center; width: 100%; }
+.svc-hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.svc-grid-4     { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.svc-grid-3     { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.svc-process-grid { display: grid; grid-template-columns: 340px 1fr; gap: 80px; align-items: start; }
+.svc-cta-box    { max-width: 900px; margin: 0 auto; padding: 64px; display: grid;
+                  grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+/* despre-noi */
+.dn-stats-wrap  { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+.dn-stats-grid  { display: grid; grid-template-columns: repeat(4, 1fr);
+                  border-left: 1px solid oklch(0.93 0.01 240); }
+.dn-story-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+@media (max-width: 1024px) {
+  .svc-hero         { grid-template-columns: 1fr; gap: 48px; }
+  .svc-grid-4       { grid-template-columns: repeat(2, 1fr); }
+  .svc-process-grid { grid-template-columns: 1fr; gap: 40px; }
+  .svc-process-sticky { position: static !important; top: auto !important; }
+}
+@media (max-width: 768px) {
+  .svc-section { padding: 56px 24px; }
+  .svc-hero    { padding: 56px 24px; gap: 40px; }
+  .svc-grid-3  { grid-template-columns: 1fr; }
+  .svc-cta-box { grid-template-columns: 1fr; gap: 32px; padding: 44px 32px; }
+  .dn-stats-wrap { padding: 0 24px; }
+  .dn-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dn-story-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 560px) {
+  .svc-section    { padding: 44px 18px; }
+  .svc-hero       { padding: 44px 18px; }
+  .svc-grid-4     { grid-template-columns: 1fr; }
+  .svc-hero-stats { grid-template-columns: 1fr 1fr; }
+  .svc-cta-box    { padding: 32px 20px; }
+  .dn-stats-wrap  { padding: 0 18px; }
+  .dn-stats-grid  { grid-template-columns: 1fr; }
 }
 
 /* ==========================================================================
@@ -741,7 +822,10 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 
 /* Shop Layout (category page) */
 .shop-layout { display:grid; grid-template-columns:220px 1fr; gap:2.5rem; align-items:start; padding:2rem 0; }
-@media (max-width: 768px) { .shop-layout { grid-template-columns:1fr; } }
+@media (max-width: 768px) {
+  .shop-layout { grid-template-columns:1fr; gap:1.5rem; }
+  .shop-sidebar { position:static; top:auto; }
+}
 
 /* Sidebar Filters */
 .shop-sidebar { border:1px solid var(--color-border); padding:1.25rem; position:sticky; top:5rem; }
@@ -752,7 +836,7 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   font-family:var(--font-ui); font-size:.875rem; cursor:pointer; color:var(--color-muted); }
 .filter-check-item input { accent-color:var(--color-primary); }
 .filter-price-row { display:flex; gap:.5rem; align-items:center; }
-.filter-price-row input { flex:1; border:1px solid var(--color-border); padding:.35rem .5rem;
+.filter-price-row input { flex:1; min-width:0; border:1px solid var(--color-border); padding:.35rem .5rem;
   font-family:var(--font-ui); font-size:.875rem; }
 .filter-price-row span { color:var(--color-muted); font-size:.875rem; }
 
@@ -829,9 +913,30 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 .cart-note { font-family:var(--font-ui); font-size:.8rem; color:var(--color-muted);
   margin-top:.75rem; }
 
+/* Coș responsive — sub 560px rândurile se stivuiesc sub formă de carduri */
+@media (max-width: 560px) {
+  .cart-summary { max-width:none; margin-left:0; }
+  .cart-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .cart-table, .cart-table tbody, .cart-table tr, .cart-table td { display:block; width:100%; }
+  .cart-table tr { border:1px solid var(--color-border); border-radius:8px;
+    margin-bottom:1rem; padding:.5rem .875rem; }
+  .cart-table td { border:none; padding:.45rem 0; display:flex; align-items:center;
+    justify-content:space-between; gap:1rem; text-align:right; }
+  .cart-table td::before { content:attr(data-label); font-family:var(--font-ui); font-weight:600;
+    font-size:.75rem; text-transform:uppercase; letter-spacing:.04em; color:var(--color-muted);
+    text-align:left; flex-shrink:0; }
+  .cart-table td:first-child, .cart-table td:last-child { justify-content:flex-start; }
+  .cart-table td:first-child::before, .cart-table td:last-child::before { display:none; }
+  .cart-area-input { width:90px; }
+}
+
 /* Checkout */
 .checkout-layout { display:grid; grid-template-columns:1fr 380px; gap:2.5rem; padding:2rem 0 4rem; }
-@media (max-width: 900px) { .checkout-layout { grid-template-columns:1fr; } }
+@media (max-width: 1024px) {
+  .checkout-layout { grid-template-columns:1fr; }
+  /* Sumarul nu mai stă lipit — apare sub formular */
+  .checkout-summary { position:static; top:auto; }
+}
 .checkout-section-title { font-family:var(--font-ui); font-weight:700; font-size:1rem;
   text-transform:uppercase; letter-spacing:.07em; margin-bottom:1.25rem; padding-bottom:.5rem;
   border-bottom:2px solid var(--color-primary); }
@@ -899,8 +1004,10 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   gap:4.25rem;
   align-items:start;
 }
-@media (max-width:900px) {
+@media (max-width:1024px) {
   .prd-layout { grid-template-columns:1fr; gap:2rem; }
+  /* La o coloană, sticky nu mai are sens — galeria stă normal deasupra info */
+  .prd-gallery, .prd-gallery--sticky { position:static; top:auto; }
 }
 
 /* ─── Gallery ─── */
@@ -1072,7 +1179,8 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
 .prd-color-name { color:#0F2443; font-size:.8125rem; text-transform:none; letter-spacing:0; font-weight:500; }
 .prd-color-swatches {
   display:grid;
-  grid-template-columns:repeat(10, 52px);
+  grid-template-columns:repeat(auto-fill, 52px);
+  justify-content:space-between;
   gap:16px 8px;
 }
 
@@ -1193,13 +1301,19 @@ h3 { font-family: var(--font-body); font-weight: 700; line-height: 1.2; letter-s
   font-size:.75rem; color:oklch(0.36 0.12 145); font-weight:500;
 }
 
-@media (max-width:600px) {
+@media (max-width:768px) {
+  .prd-container { padding:0 1.5rem; }
+  .prd-layout-wrap { padding-top:2rem; padding-bottom:3.5rem; }
+}
+@media (max-width:560px) {
+  .prd-container { padding:0 1.125rem; }
   .prd-title { font-size:1.75rem; }
   .prd-price-num { font-size:2.25rem; }
-  .prd-gallery-main { height:320px; }
+  .prd-gallery-main, .prd-swatch-main { height:320px; }
   .prd-specs-grid { grid-template-columns:1fr; }
   .prd-cart-row { flex-direction:column; }
-  .prd-add-btn { height:50px; }
+  .prd-qty-control { align-self:flex-start; }
+  .prd-add-btn { height:50px; width:100%; }
 }
 
 /* ---------- Pagini legale ---------- */

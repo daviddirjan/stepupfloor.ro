@@ -23,15 +23,13 @@ class CheckoutController
         // Previne enumerarea /confirmare/{id} și expunerea datelor personale ale altor clienți.
         $recent = $_SESSION['recent_order_ids'] ?? [];
         if (!in_array($orderId, array_map('intval', $recent), true)) {
-            http_response_code(404);
-            echo '<h1>404 — Comanda nu a fost găsită</h1>';
+            (new ErrorController())->notFound();
             return;
         }
 
         $order = (new OrderModel())->findWithItems($orderId);
         if (!$order) {
-            http_response_code(404);
-            echo '<h1>404 — Comanda nu a fost găsită</h1>';
+            (new ErrorController())->notFound();
             return;
         }
 

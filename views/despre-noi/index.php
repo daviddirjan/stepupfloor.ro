@@ -18,15 +18,15 @@
   <div style="position:absolute;top:-160px;right:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.22) 0%,transparent 68%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:-120px;left:20%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.10) 0%,transparent 68%);pointer-events:none;"></div>
 
-  <div style="max-width:1320px;margin:0 auto;padding:80px 48px;position:relative;z-index:1;width:100%;">
+  <div class="svc-section" style="max-width:1320px;margin:0 auto;position:relative;z-index:1;width:100%;">
     <div style="animation:fadeUp 0.6s ease both;max-width:680px;">
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(29,95,170,0.18);border:1px solid rgba(29,95,170,0.35);border-radius:20px;padding:5px 14px;margin-bottom:24px;">
         <div style="width:7px;height:7px;border-radius:50%;background:#4d8fd4;"></div>
         <span style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#4d8fd4;text-transform:uppercase;">Compania noastră</span>
       </div>
-      <h1 style="font-family:'DM Serif Display',serif;font-size:58px;color:#fff;line-height:1.1;margin-bottom:22px;">Pasionați de pardoseli<br>de peste 20 de ani</h1>
+      <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(34px,6vw,58px);color:#fff;line-height:1.1;margin-bottom:22px;">Sursa ta de încredere<br>pentru pardoseli de calitate</h1>
       <p style="font-size:16px;color:oklch(0.67 0.04 230);line-height:1.75;max-width:560px;">
-        StepUp Floor a pornit dintr-o convingere simplă: o pardoseală bine montată transformă orice spațiu. Astăzi suntem liderul regional în montaj și întreținere de pardoseli textile și PVC în vestul României.
+        Descoperă StepUp Floor — mochete, linoleum și pardoseli PVC LVT care aduc deopotrivă rafinament și funcționalitate în design-ul interior. O gamă diversificată de produse de calitate superioară, adaptate nevoilor tale specifice.
       </p>
     </div>
   </div>
@@ -34,19 +34,19 @@
 
 <!-- STATS -->
 <div style="background:#fff;border-bottom:1px solid oklch(0.93 0.01 240);">
-  <div style="max-width:1320px;margin:0 auto;padding:0 48px;">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid oklch(0.93 0.01 240);">
+  <div class="dn-stats-wrap">
+    <div class="dn-stats-grid">
       <div style="padding:40px 36px;border-right:1px solid oklch(0.93 0.01 240);">
-        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">20+</div>
-        <div style="font-size:13px;color:oklch(0.48 0.03 240);line-height:1.5;">ani de experiență în montaj</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">2020</div>
+        <div style="font-size:13px;color:oklch(0.48 0.03 240);line-height:1.5;">anul înființării StepUp Floor</div>
       </div>
       <div style="padding:40px 36px;border-right:1px solid oklch(0.93 0.01 240);">
-        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">1000+</div>
-        <div style="font-size:13px;color:oklch(0.48 0.03 240);line-height:1.5;">proiecte finalizate cu succes</div>
-      </div>
-      <div style="padding:40px 36px;border-right:1px solid oklch(0.93 0.01 240);">
-        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">8</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">3</div>
         <div style="font-size:13px;color:oklch(0.48 0.03 240);line-height:1.5;">județe acoperite în vestul României</div>
+      </div>
+      <div style="padding:40px 36px;border-right:1px solid oklch(0.93 0.01 240);">
+        <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">2</div>
+        <div style="font-size:13px;color:oklch(0.48 0.03 240);line-height:1.5;">servicii: montaj și întreținere</div>
       </div>
       <div style="padding:40px 36px;border-right:1px solid oklch(0.93 0.01 240);">
         <div style="font-family:'DM Serif Display',serif;font-size:48px;color:#0F2443;line-height:1;margin-bottom:8px;">5★</div>
@@ -57,21 +57,21 @@
 </div>
 
 <!-- POVESTEA NOASTRĂ -->
-<div style="background:#f4f1ec;padding:88px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+<div class="svc-section" style="background:#f4f1ec;">
+  <div class="svc-container">
+    <div class="dn-story-grid">
 
       <div>
         <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:14px;">Povestea noastră</div>
-        <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;margin-bottom:24px;">De la un atelier mic la<br>liderul regional</h2>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;margin-bottom:24px;">Rafinament și funcționalitate,<br>sub un singur acoperiș</h2>
         <p style="font-size:15px;color:oklch(0.44 0.03 240);line-height:1.8;margin-bottom:20px;">
-          Totul a început în 2003, când fondatorul companiei a deschis primul atelier de montaj mochete în Timișoara. Cu răbdare, calitate și respect față de fiecare client, afacerea a crescut organic.
+          StepUp Floor este sursa ta de încredere pentru mochete, linoleum și pardoseli PVC LVT — produse care aduc deopotrivă rafinament și funcționalitate în design-ul interior. Oferim o gamă diversificată de produse de calitate superioară, adaptate nevoilor tale specifice.
         </p>
         <p style="font-size:15px;color:oklch(0.44 0.03 240);line-height:1.8;margin-bottom:20px;">
-          Astăzi, StepUp Floor are o echipă de 15 specialiști certificați, un showroom modern în centrul Timișoarei și parteneriate cu cei mai importanți producători europeni de pardoseli.
+          Cu o varietate largă de modele și culori, ne dedicăm să aducem un plus de confort și stil în locuința sau spațiul tău comercial. Fie că e vorba de un proiect rezidențial sau comercial, te susținem în crearea unui mediu atrăgător și funcțional.
         </p>
         <p style="font-size:15px;color:oklch(0.44 0.03 240);line-height:1.8;">
-          Fie că e vorba de o cameră de hotel, un birou open-space sau o locuință privată — tratăm fiecare proiect cu aceeași seriozitate și atenție la detalii.
+          Ne bucurăm să fim partenerul tău în amenajarea spațiului, contribuind la crearea unei atmosfere plăcute și moderne — de la prima idee până la ultima îmbinare.
         </p>
       </div>
 
@@ -80,9 +80,9 @@
         <div style="position:relative;z-index:1;">
           <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#fff;line-height:1.3;margin-bottom:20px;">"Calitatea unei pardoseli se vede la prima vedere. Durabilitatea ei — după ani de utilizare."</div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:48px;height:48px;border-radius:50%;background:rgba(29,95,170,0.35);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#4d8fd4;">S</div>
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(29,95,170,0.35);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#4d8fd4;">C</div>
             <div>
-              <div style="font-size:14px;font-weight:600;color:#fff;">Szabo Attila</div>
+              <div style="font-size:14px;font-weight:600;color:#fff;">Claudiu Marițan</div>
               <div style="font-size:12px;color:oklch(0.55 0.04 230);">Fondator & Director General</div>
             </div>
           </div>
@@ -94,14 +94,14 @@
 </div>
 
 <!-- VALORILE NOASTRE -->
-<div style="background:#fff;padding:80px 48px;">
-  <div style="max-width:1320px;margin:0 auto;">
+<div class="svc-section" style="background:#fff;">
+  <div class="svc-container">
     <div style="text-align:center;margin-bottom:56px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#1D5FAA;text-transform:uppercase;margin-bottom:12px;">Cum gândim</div>
       <h2 style="font-family:'DM Serif Display',serif;font-size:40px;color:#0F2443;line-height:1.2;">Valorile care ne ghidează</h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+    <div class="svc-grid-3">
 
       <div class="dn-val-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:16px;padding:36px;transition:box-shadow .22s,transform .22s;">
         <div style="width:52px;height:52px;background:oklch(0.94 0.04 240);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
@@ -145,35 +145,19 @@
 
       <div class="dn-val-card" style="border:1.5px solid oklch(0.92 0.01 240);border-radius:16px;padding:36px;transition:box-shadow .22s,transform .22s;">
         <div style="width:52px;height:52px;background:oklch(0.94 0.04 240);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#1D5FAA" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="#1D5FAA" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22c5-3 8-7 8-12a8 8 0 10-16 0c0 5 3 9 8 12z" stroke="#1D5FAA" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 22V10M12 13l-3-3M12 15l3-3" stroke="#1D5FAA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div style="font-size:20px;font-weight:700;color:#0F2443;margin-bottom:12px;">Comunitate locală</div>
-        <div style="font-size:14px;color:oklch(0.48 0.03 240);line-height:1.75;">Suntem timișoreni. Reinvestim în comunitate și susținem furnizori și parteneri locali.</div>
+        <div style="font-size:20px;font-weight:700;color:#0F2443;margin-bottom:12px;">Responsabilitate față de mediu</div>
+        <div style="font-size:14px;color:oklch(0.48 0.03 240);line-height:1.75;">Ne pasă nu doar de aspectul estetic, ci și de mediu. Susținem un mediu sănătos prin parteneriate cu organizații non-profit, contribuind la refacerea pădurilor la nivel global.</div>
       </div>
 
-    </div>
-  </div>
-</div>
-
-<!-- PARTENERIATE -->
-<div style="background:#0F2443;padding:72px 48px;">
-  <div style="max-width:1320px;margin:0 auto;text-align:center;">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:#4d8fd4;text-transform:uppercase;margin-bottom:14px;">Parteneri</div>
-    <h2 style="font-family:'DM Serif Display',serif;font-size:36px;color:#fff;line-height:1.2;margin-bottom:14px;">Lucrăm cu branduri de top</h2>
-    <p style="font-size:14px;color:oklch(0.58 0.04 230);max-width:480px;margin:0 auto 48px;">Suntem distribuitori autorizați și instalatori certificați pentru principalii producători europeni de pardoseli.</p>
-    <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;">
-      <?php foreach (['Interface','Tarkett','Forbo','Flotex','Desso'] as $brand): ?>
-      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:20px 32px;font-size:15px;font-weight:600;color:oklch(0.68 0.04 230);letter-spacing:0.06em;">
-        <?= $brand ?>
-      </div>
-      <?php endforeach; ?>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<div style="background:#f4f1ec;padding:88px 48px;">
-  <div style="max-width:900px;margin:0 auto;background:#0F2443;border-radius:24px;padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;">
+<div class="svc-section" style="background:#f4f1ec;">
+  <div class="svc-cta-box" style="background:#0F2443;border-radius:24px;position:relative;overflow:hidden;">
     <div style="position:absolute;top:-80px;right:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(29,95,170,0.25) 0%,transparent 70%);pointer-events:none;"></div>
     <div style="position:relative;z-index:1;">
       <div style="font-family:'DM Serif Display',serif;font-size:34px;color:#fff;line-height:1.25;margin-bottom:16px;">Hai să construim ceva împreună</div>

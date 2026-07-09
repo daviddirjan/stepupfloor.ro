@@ -54,14 +54,14 @@ if (!empty($_SESSION['flash'])):
                                     </a>
                                 </div>
                             </td>
-                            <td>
+                            <td data-label="Suprafață (m²)">
                                 <input type="number" class="cart-area-input"
                                        name="items[<?= htmlspecialchars($key) ?>][area_m2]"
                                        value="<?= htmlspecialchars($item['quantity_m2']) ?>"
                                        min="0.1" step="0.1">
                             </td>
-                            <td><?= number_format((float)$item['price_per_m2'], 2, ',', '.') ?> lei</td>
-                            <td class="cart-line-total">
+                            <td data-label="Preț / m²"><?= number_format((float)$item['price_per_m2'], 2, ',', '.') ?> lei</td>
+                            <td class="cart-line-total" data-label="Total">
                                 <?= number_format($item['quantity_m2'] * $item['price_per_m2'], 2, ',', '.') ?> lei
                             </td>
                             <td>
