@@ -134,14 +134,14 @@ class ProductModel
     {
         $stmt = $this->db->prepare(
             'INSERT INTO products (slug, name, category, category_id, price_label, heading, description, badge, image,
-             is_featured, sort_order, thickness, color, weight_per_m2, price_per_m2,
+             is_featured, is_variable, sort_order, thickness, color, weight_per_m2, price_per_m2,
              usage_class, warranty, rating, reviews_count, discount_label)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute([
             $d['slug'], $d['name'], $d['category'] ?? '', $d['category_id'] ?: null,
             $d['price_label'], $d['heading'], $d['description'],
-            $d['badge'], $d['image'], (int)($d['is_featured'] ?? 0), (int)($d['sort_order'] ?? 0),
+            $d['badge'], $d['image'], (int)($d['is_featured'] ?? 0), (int)($d['is_variable'] ?? 0), (int)($d['sort_order'] ?? 0),
             $d['thickness'] ?? '', $d['color'] ?? '',
             $d['weight_per_m2'] !== '' && $d['weight_per_m2'] !== null ? (float)$d['weight_per_m2'] : null,
             $d['price_per_m2'] !== '' && $d['price_per_m2'] !== null ? (float)$d['price_per_m2'] : null,
@@ -156,14 +156,14 @@ class ProductModel
     {
         $stmt = $this->db->prepare(
             'UPDATE products SET slug=?, name=?, category=?, category_id=?, price_label=?, heading=?,
-             description=?, badge=?, image=?, is_featured=?, sort_order=?,
+             description=?, badge=?, image=?, is_featured=?, is_variable=?, sort_order=?,
              thickness=?, color=?, weight_per_m2=?, price_per_m2=?,
              usage_class=?, warranty=?, rating=?, reviews_count=?, discount_label=? WHERE id=?'
         );
         return $stmt->execute([
             $d['slug'], $d['name'], $d['category'] ?? '', $d['category_id'] ?: null,
             $d['price_label'], $d['heading'], $d['description'],
-            $d['badge'], $d['image'], (int)($d['is_featured'] ?? 0), (int)($d['sort_order'] ?? 0),
+            $d['badge'], $d['image'], (int)($d['is_featured'] ?? 0), (int)($d['is_variable'] ?? 0), (int)($d['sort_order'] ?? 0),
             $d['thickness'] ?? '', $d['color'] ?? '',
             $d['weight_per_m2'] !== '' && $d['weight_per_m2'] !== null ? (float)$d['weight_per_m2'] : null,
             $d['price_per_m2'] !== '' && $d['price_per_m2'] !== null ? (float)$d['price_per_m2'] : null,

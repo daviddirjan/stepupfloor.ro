@@ -28,7 +28,7 @@ class AdminCategoryController
     {
         $this->render('admin/categories/index', [
             'pageTitle'  => 'Categorii',
-            'categories' => $this->model->getAll(),
+            'categories' => $this->model->getAllWithProductCount(),
         ]);
     }
 

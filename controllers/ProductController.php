@@ -11,7 +11,9 @@ class ProductController
         }
 
         $images        = (new ProductImageModel())->getByProductId((int)$product['id']);
-        $colorVariants = (new ProductColorModel())->getByProductId((int)$product['id']);
+        $colorVariants = !empty($product['is_variable'])
+            ? (new ProductColorModel())->getByProductId((int)$product['id'])
+            : [];
         $category      = $product['category_id']
             ? (new CategoryModel())->findById((int)$product['category_id'])
             : null;

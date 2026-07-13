@@ -9,19 +9,21 @@
                 <th>#</th>
                 <th>Nume</th>
                 <th>Slug</th>
+                <th>Produse</th>
                 <th>Ordine</th>
                 <th>Acțiuni</th>
             </tr>
         </thead>
         <tbody>
         <?php if (empty($categories)): ?>
-            <tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:2rem;">Nicio categorie încă.</td></tr>
+            <tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:2rem;">Nicio categorie încă.</td></tr>
         <?php else: ?>
             <?php foreach ($categories as $cat): ?>
             <tr>
                 <td><?= $cat['id'] ?></td>
                 <td><?= htmlspecialchars($cat['name']) ?></td>
                 <td><code><?= htmlspecialchars($cat['slug']) ?></code></td>
+                <td><?= (int)($cat['product_count'] ?? 0) ?></td>
                 <td><?= $cat['sort_order'] ?></td>
                 <td>
                     <div class="actions">

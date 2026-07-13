@@ -24,7 +24,7 @@
                 <td><?= $p['id'] ?></td>
                 <td>
                     <?php if ($p['image']): ?>
-                        <img src="<?= BASE_URL ?>assets/images/<?= htmlspecialchars($p['image']) ?>" style="height:40px;border-radius:4px;object-fit:cover;">
+                        <img src="<?= BASE_URL ?>assets/images/products/<?= htmlspecialchars($p['image']) ?>" style="height:40px;border-radius:4px;object-fit:cover;">
                     <?php else: ?>
                         <span style="color:#9ca3af;">—</span>
                     <?php endif; ?>

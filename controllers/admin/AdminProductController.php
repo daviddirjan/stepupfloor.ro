@@ -4,6 +4,7 @@ class AdminProductController
 {
     private ProductModel  $model;
     private CategoryModel $categoryModel;
+    private array $uploadWarnings = [];
 
     public function __construct()
     {
@@ -79,7 +80,7 @@ class AdminProductController
         $newId = $this->model->create($data);
         $this->handleGalleryUploads($newId);
         $this->handleColorVariants($newId);
-        $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Produsul a fost creat.'];
+        $this->flashResult('Produsul a fost creat.');
         $this->redirect('admin/products');
     }
 
@@ -133,7 +134,7 @@ class AdminProductController
         $this->model->update($id, $data);
         $this->handleGalleryUploads($id);
         $this->handleColorVariants($id);
-        $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Produsul a fost actualizat.'];
+        $this->flashResult('Produsul a fost actualizat.');
         $this->redirect('admin/products');
     }
 
@@ -199,6 +200,7 @@ class AdminProductController
             'description'   => trim($_POST['description'] ?? ''),
             'badge'         => trim($_POST['badge'] ?? ''),
             'is_featured'   => isset($_POST['is_featured']) ? 1 : 0,
+            'is_variable'   => isset($_POST['is_variable']) ? 1 : 0,
             'sort_order'    => (int) ($_POST['sort_order'] ?? 0),
             'image'         => '',
             'thickness'     => trim($_POST['thickness'] ?? ''),
@@ -231,20 +233,68 @@ class AdminProductController
 
     private function handleUpload(string $inputName, string $targetDir, int $index = -1): string|false
     {
-        $tmp  = $index >= 0 ? ($_FILES[$inputName]['tmp_name'][$index] ?? '') : ($_FILES[$inputName]['tmp_name'] ?? '');
-        $size = $index >= 0 ? ($_FILES[$inputName]['size'][$index] ?? 0)     : ($_FILES[$inputName]['size'] ?? 0);
-        $name = $index >= 0 ? ($_FILES[$inputName]['name'][$index] ?? '')    : ($_FILES[$inputName]['name'] ?? '');
+        $tmp   = $index >= 0 ? ($_FILES[$inputName]['tmp_name'][$index] ?? '') : ($_FILES[$inputName]['tmp_name'] ?? '');
+        $size  = $index >= 0 ? ($_FILES[$inputName]['size'][$index] ?? 0)      : ($_FILES[$inputName]['size'] ?? 0);
+        $name  = $index >= 0 ? ($_FILES[$inputName]['name'][$index] ?? '')     : ($_FILES[$inputName]['name'] ?? '');
+        $error = $index >= 0 ? ($_FILES[$inputName]['error'][$index] ?? UPLOAD_ERR_NO_FILE)
+                             : ($_FILES[$inputName]['error'] ?? UPLOAD_ERR_NO_FILE);
 
-        if (empty($tmp)) return false;
+        // No file chosen for this slot — normal, not an error.
+        if ($error === UPLOAD_ERR_NO_FILE || ($error === UPLOAD_ERR_OK && $name === '')) {
+            return false;
+        }
+
+        // A file was submitted but PHP rejected it (size limit, partial, etc.).
+        if ($error !== UPLOAD_ERR_OK || $tmp === '' || !is_uploaded_file($tmp)) {
+            $this->uploadWarnings[] = htmlspecialchars($name ?: 'imaginea') . ': ' . $this->uploadErrorMessage($error);
+            return false;
+        }
+
         $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-        $mime    = mime_content_type($tmp);
-        if (!in_array($mime, $allowed, true)) return false;
-        if ($size > 3 * 1024 * 1024) return false;
+        $mime    = $this->detectMime($tmp);
+        if (!in_array($mime, $allowed, true)) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': format neacceptat (doar JPG, PNG, WebP).';
+            return false;
+        }
+        if ($size > 3 * 1024 * 1024) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': depășește 3MB.';
+            return false;
+        }
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $filename = uniqid('img_', true) . '.' . $ext;
         $dest     = BASE_PATH . '/' . $targetDir . $filename;
-        if (!move_uploaded_file($tmp, $dest)) return false;
+        if (!move_uploaded_file($tmp, $dest)) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': nu s-a putut salva pe server (verifică permisiunile folderului).';
+            return false;
+        }
         return $filename;
+    }
+
+    private function detectMime(string $path): string
+    {
+        if (function_exists('finfo_open')) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime  = finfo_file($finfo, $path);
+            finfo_close($finfo);
+            if ($mime) return $mime;
+        }
+        if (function_exists('mime_content_type')) {
+            return (string) mime_content_type($path);
+        }
+        $info = @getimagesize($path);
+        return $info['mime'] ?? '';
+    }
+
+    private function uploadErrorMessage(int $code): string
+    {
+        return match ($code) {
+            UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE =>
+                'fișierul e prea mare pentru limita serverului (mărește upload_max_filesize / post_max_size).',
+            UPLOAD_ERR_PARTIAL   => 'încărcare incompletă, reîncearcă.',
+            UPLOAD_ERR_NO_TMP_DIR => 'lipsește folderul temporar pe server.',
+            UPLOAD_ERR_CANT_WRITE => 'serverul nu a putut scrie fișierul pe disc.',
+            default              => 'eroare la încărcare (cod ' . $code . ').',
+        };
     }
 
     private function deleteColorImage(int $productId, int $colorId, int $slot = 1): void
@@ -370,19 +420,36 @@ class AdminProductController
 
     private function handleColorImageUpload(string $inputName, int $index): string|false
     {
-        $tmp  = $_FILES[$inputName]['tmp_name'][$index] ?? '';
-        $size = $_FILES[$inputName]['size'][$index] ?? 0;
-        $name = $_FILES[$inputName]['name'][$index] ?? '';
+        $tmp   = $_FILES[$inputName]['tmp_name'][$index] ?? '';
+        $size  = $_FILES[$inputName]['size'][$index] ?? 0;
+        $name  = $_FILES[$inputName]['name'][$index] ?? '';
+        $error = $_FILES[$inputName]['error'][$index] ?? UPLOAD_ERR_NO_FILE;
 
-        if (empty($tmp)) return false;
+        if ($error === UPLOAD_ERR_NO_FILE || ($error === UPLOAD_ERR_OK && $name === '')) {
+            return false;
+        }
+        if ($error !== UPLOAD_ERR_OK || $tmp === '' || !is_uploaded_file($tmp)) {
+            $this->uploadWarnings[] = htmlspecialchars($name ?: 'imagine culoare') . ': ' . $this->uploadErrorMessage($error);
+            return false;
+        }
+
         $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-        $mime    = mime_content_type($tmp);
-        if (!in_array($mime, $allowed, true)) return false;
-        if ($size > 3 * 1024 * 1024) return false;
+        $mime    = $this->detectMime($tmp);
+        if (!in_array($mime, $allowed, true)) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': format neacceptat (doar JPG, PNG, WebP).';
+            return false;
+        }
+        if ($size > 3 * 1024 * 1024) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': depășește 3MB.';
+            return false;
+        }
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $filename = uniqid('color_', true) . '.' . $ext;
         $dest     = BASE_PATH . '/assets/images/products/' . $filename;
-        if (!move_uploaded_file($tmp, $dest)) return false;
+        if (!move_uploaded_file($tmp, $dest)) {
+            $this->uploadWarnings[] = htmlspecialchars($name) . ': nu s-a putut salva pe server (verifică permisiunile folderului).';
+            return false;
+        }
         return $filename;
     }
 
@@ -404,7 +471,7 @@ class AdminProductController
     {
         return [
             'id'=>0,'slug'=>'','name'=>'','category'=>'','category_id'=>0,'price_label'=>'',
-            'heading'=>'','description'=>'','badge'=>'','image'=>'','is_featured'=>0,'sort_order'=>0,
+            'heading'=>'','description'=>'','badge'=>'','image'=>'','is_featured'=>0,'is_variable'=>0,'sort_order'=>0,
             'thickness'=>'','color'=>'','weight_per_m2'=>'','price_per_m2'=>'',
             'usage_class'=>'','warranty'=>'','rating'=>null,'reviews_count'=>0,'discount_label'=>'',
         ];
@@ -429,6 +496,19 @@ class AdminProductController
         extract($data);
         $content = BASE_PATH . '/views/' . $view . '.php';
         require BASE_PATH . '/views/layouts/admin.php';
+    }
+
+    private function flashResult(string $successMsg): void
+    {
+        if ($this->uploadWarnings) {
+            $_SESSION['flash'] = [
+                'type' => 'error',
+                'msg'  => 'Produsul a fost salvat, dar unele imagini NU au fost încărcate: '
+                          . implode(' ', $this->uploadWarnings),
+            ];
+        } else {
+            $_SESSION['flash'] = ['type' => 'success', 'msg' => $successMsg];
+        }
     }
 
     private function redirect(string $path): void

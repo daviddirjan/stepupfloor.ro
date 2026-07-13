@@ -14,6 +14,17 @@ class CategoryModel
         return $this->db->query('SELECT * FROM categories ORDER BY sort_order ASC, name ASC')->fetchAll();
     }
 
+    public function getAllWithProductCount(): array
+    {
+        return $this->db->query(
+            'SELECT c.*, COUNT(p.id) AS product_count
+             FROM categories c
+             LEFT JOIN products p ON p.category_id = c.id
+             GROUP BY c.id
+             ORDER BY c.sort_order ASC, c.name ASC'
+        )->fetchAll();
+    }
+
     public function findById(int $id): array|false
     {
         $stmt = $this->db->prepare('SELECT * FROM categories WHERE id = ?');

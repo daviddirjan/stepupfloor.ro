@@ -13,6 +13,21 @@ $hasColors   = !empty($colorData);
 $firstColor  = $hasColors ? $colorData[0] : ['label' => '', 'swatch' => '#8A8E96'];
 $pricePerM2  = (float)($product['price_per_m2'] ?? 0);
 $hasBuyPrice = $pricePerM2 > 0;
+
+// Main product photo (fallback used when a color has no image of its own).
+$productImg  = $product['image'] ? BASE_URL . 'assets/images/products/' . $product['image'] : '';
+// Initial image shown on load: selected color's image → product image.
+$initialImg  = $hasColors ? ($colorData[0]['image'] ?: $productImg) : $productImg;
+
+// Real photo gallery (main image + secondary uploaded gallery images).
+// Only real, uploaded photos are shown as thumbnails — no fabricated tiles.
+$photoImages = [];
+if ($productImg) $photoImages[] = $productImg;
+foreach ($images as $img) {
+    $photoImages[] = BASE_URL . 'assets/images/products/' . $img['filename'];
+}
+$photoImages = array_values(array_unique($photoImages));
+$hasPhotos   = !empty($photoImages);
 ?>
 
 <!-- ═══ BREADCRUMB ═══ -->
@@ -51,54 +66,40 @@ $hasBuyPrice = $pricePerM2 > 0;
         <div class="prd-swatch-vignette"></div>
 
         <!-- Real product image (shown when available) -->
-        <img src="" alt="" id="prd-main-img" class="prd-swatch-photo" style="display:none;">
+        <img src="<?= htmlspecialchars($initialImg) ?>" alt="<?= htmlspecialchars($product['name']) ?>" id="prd-main-img" class="prd-swatch-photo" style="<?= $initialImg ? '' : 'display:none;' ?>">
 
         <!-- Photo placeholder (shown when no image) -->
-        <div class="prd-swatch-placeholder" id="prd-swatch-placeholder">
+        <div class="prd-swatch-placeholder" id="prd-swatch-placeholder" style="<?= $initialImg ? 'display:none;' : '' ?>">
           <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect x="1.5" y="1.5" width="41" height="41" rx="5" stroke="rgba(255,255,255,0.28)" stroke-width="1.4" stroke-dasharray="4 3"/><circle cx="15" cy="17" r="4.5" stroke="rgba(255,255,255,0.28)" stroke-width="1.4"/><path d="M2 32l11-11 7 7 9-10 15 14" stroke="rgba(255,255,255,0.28)" stroke-width="1.4" stroke-linejoin="round"/></svg>
           <span>fotografie produs</span>
         </div>
 
-        <!-- Color chip (bottom-left) -->
+        <!-- Color chip (bottom-left) — only for variable products -->
+        <?php if ($hasColors): ?>
         <div class="prd-swatch-chip" id="prd-swatch-chip">
           <div class="prd-chip-dot" id="prd-chip-dot" style="background-color:<?= htmlspecialchars($firstColor['swatch']) ?>;"></div>
           <span class="prd-chip-label" id="prd-chip-label"><?= htmlspecialchars($firstColor['label']) ?></span>
         </div>
+        <?php endif; ?>
 
-        <!-- Expand icon -->
-        <div class="prd-swatch-expand">
+        <!-- Expand / zoom icon -->
+        <button type="button" class="prd-swatch-expand" id="prd-zoom-btn" aria-label="Mărește imaginea"<?= $initialImg ? '' : ' style="display:none;"' ?>>
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 1h4M1 1v4M14 1h-4M14 1v4M1 14h4M1 14v-4M14 14h-4M14 14v-4" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+        </button>
       </div>
 
-      <!-- Thumbnails (4 texture views of the active color) -->
-      <div class="prd-thumbs prd-thumbs--swatch" id="prd-thumbs">
-        <?php
-        $thumbStyles = [
-          ['', 'Vista 1'],
-          ['filter:brightness(0.78);', 'Detail'],
-          ['filter:brightness(1.18) saturate(0.8);', 'Ambient'],
-          ['filter:brightness(0.9) saturate(1.2);', 'Textură'],
-        ];
-        $thumbPatterns = [
-          'repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 10px)',
-          'repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 10px)',
-          'repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 2px, transparent 2px, transparent 10px)',
-          'repeating-linear-gradient(0deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 2px, transparent 2px, transparent 10px)',
-        ];
-        ?>
-        <?php foreach ($thumbStyles as $ti => [$style, $label]): ?>
+      <?php if ($hasPhotos && count($photoImages) > 1): ?>
+      <!-- Real photo thumbnails — only the images actually uploaded for this product -->
+      <div class="prd-thumbs prd-thumbs--photo" id="prd-thumbs">
+        <?php foreach ($photoImages as $pi => $src): ?>
         <button type="button"
-                class="prd-thumb-swatch-btn <?= $ti === 0 ? 'prd-thumb-swatch-btn--active' : '' ?>"
-                data-thumb-index="<?= $ti ?>"
-                onclick="prdSelectThumb(this)">
-          <div class="prd-thumb-swatch-bg" id="prd-thumb-bg-<?= $ti ?>"
-               style="background-color:<?= htmlspecialchars($firstColor['swatch']) ?>; <?= $style ?>"></div>
-          <div class="prd-thumb-swatch-tex" style="background:<?= $thumbPatterns[$ti] ?>;"></div>
-          <span class="prd-thumb-label"><?= $label ?></span>
+                class="prd-thumb-photo-btn <?= $src === $initialImg ? 'prd-thumb-photo-btn--active' : '' ?>"
+                onclick="prdSelectPhoto(this, <?= json_encode($src) ?>)">
+          <img src="<?= htmlspecialchars($src) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
         </button>
         <?php endforeach; ?>
       </div>
+      <?php endif; ?>
 
     </div><!-- /prd-gallery -->
 
@@ -204,14 +205,6 @@ $hasBuyPrice = $pricePerM2 > 0;
       </div>
       <?php endif; ?>
 
-      <!-- DESCRIPTION -->
-      <?php if ($product['description']): ?>
-      <div class="prd-description">
-        <div class="prd-section-label">Descriere</div>
-        <div class="prd-desc-text"><?= nl2br(htmlspecialchars($product['description'])) ?></div>
-      </div>
-      <?php endif; ?>
-
       <div class="prd-divider"></div>
 
       <!-- ADD TO CART / OFFER -->
@@ -247,11 +240,27 @@ $hasBuyPrice = $pricePerM2 > 0;
         <span>În stoc · Livrare în 5–10 zile lucrătoare</span>
       </div>
 
+      <!-- DESCRIPTION -->
+      <?php if ($product['description']): ?>
+      <div class="prd-divider"></div>
+      <div class="prd-description">
+        <div class="prd-section-label">Descriere</div>
+        <div class="prd-desc-text"><?= nl2br(htmlspecialchars($product['description'])) ?></div>
+      </div>
+      <?php endif; ?>
+
     </div><!-- /prd-info -->
   </div><!-- /prd-layout -->
 </div>
 
+<!-- ═══ ZOOM LIGHTBOX ═══ -->
+<div class="prd-lightbox" id="prd-lightbox" aria-hidden="true">
+  <button type="button" class="prd-lightbox-close" id="prd-lightbox-close" aria-label="Închide">&times;</button>
+  <img src="" alt="<?= htmlspecialchars($product['name']) ?>" id="prd-lightbox-img">
+</div>
+
 <script>
+var prdDefaultImage = <?= json_encode($productImg) ?>;
 (function () {
   var pricePerM2 = <?= $pricePerM2 ?>;
   var qtyInput   = document.getElementById('prd-qty-input');
@@ -280,12 +289,6 @@ function prdApplyColor(swatch, label, imageSrc) {
   var bg = document.getElementById('prd-swatch-bg');
   if (bg) { bg.style.backgroundColor = swatch; bg.style.transition = 'background-color 0.5s ease'; }
 
-  // Update all thumb backgrounds
-  for (var i = 0; i < 4; i++) {
-    var tb = document.getElementById('prd-thumb-bg-' + i);
-    if (tb) { tb.style.backgroundColor = swatch; tb.style.transition = 'background-color 0.5s ease'; }
-  }
-
   // Update color chip
   var dot = document.getElementById('prd-chip-dot');
   var lbl = document.getElementById('prd-chip-label');
@@ -296,11 +299,12 @@ function prdApplyColor(swatch, label, imageSrc) {
   var nameEl = document.getElementById('prd-color-name');
   if (nameEl) nameEl.textContent = label;
 
-  // Show/hide real image
+  // Show/hide real image (fall back to the product's own photo)
   var mainImg   = document.getElementById('prd-main-img');
   var placeholder = document.getElementById('prd-swatch-placeholder');
-  if (imageSrc) {
-    mainImg.src = imageSrc;
+  var src = imageSrc || prdDefaultImage;
+  if (src) {
+    mainImg.src = src;
     mainImg.style.display = '';
     if (placeholder) placeholder.style.display = 'none';
   } else {
@@ -315,8 +319,42 @@ function prdSelectColor(btn) {
   prdApplyColor(btn.dataset.swatch, btn.dataset.colorName, btn.dataset.image || '');
 }
 
-function prdSelectThumb(btn) {
-  document.querySelectorAll('.prd-thumb-swatch-btn').forEach(function (b) { b.classList.remove('prd-thumb-swatch-btn--active'); });
-  btn.classList.add('prd-thumb-swatch-btn--active');
+// Swap main image from a real photo thumbnail
+function prdSelectPhoto(btn, src) {
+  document.querySelectorAll('.prd-thumb-photo-btn').forEach(function (b) { b.classList.remove('prd-thumb-photo-btn--active'); });
+  btn.classList.add('prd-thumb-photo-btn--active');
+  var mainImg = document.getElementById('prd-main-img');
+  if (mainImg) { mainImg.src = src; mainImg.style.display = ''; }
+  var ph = document.getElementById('prd-swatch-placeholder');
+  if (ph) ph.style.display = 'none';
 }
+
+// Zoom lightbox
+(function () {
+  var lb      = document.getElementById('prd-lightbox');
+  var lbImg   = document.getElementById('prd-lightbox-img');
+  var mainImg = document.getElementById('prd-main-img');
+  if (!lb || !lbImg) return;
+
+  function open() {
+    if (!mainImg || mainImg.style.display === 'none' || !mainImg.src) return;
+    lbImg.src = mainImg.src;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('prd-zoom-btn')?.addEventListener('click', open);
+  document.getElementById('prd-swatch-main')?.addEventListener('click', function (e) {
+    // Ignore clicks on the color chip; zoom on image/panel
+    if (e.target.closest('.prd-swatch-chip')) return;
+    open();
+  });
+  document.getElementById('prd-lightbox-close')?.addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
 </script>

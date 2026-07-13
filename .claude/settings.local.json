@@ -26,7 +26,8 @@
       "Bash(python3 -c ' *)",
       "Bash(node -e ' *)",
       "Bash(php --version)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(mysql *)"
     ]
   }
 }

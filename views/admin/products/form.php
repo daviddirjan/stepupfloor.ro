@@ -122,6 +122,12 @@
                         <span>Produs featured</span>
                     </div>
                 </label>
+                <label style="margin-top:.5rem;">
+                    <div class="checkbox-row">
+                        <input type="checkbox" name="is_variable" id="is_variable" <?= !empty($product['is_variable']) ? 'checked' : '' ?>>
+                        <span>Produs variabil <small style="color:#6b7280;">(activează variațiile de culoare)</small></span>
+                    </div>
+                </label>
             </div>
         </div>
 
@@ -146,12 +152,11 @@
                         <div class="gallery-admin-thumb">
                             <img src="<?= BASE_URL ?>assets/images/products/<?= htmlspecialchars($img['filename']) ?>" alt="">
                             <?php if ($product['id']): ?>
-                            <form method="POST"
-                                  action="<?= BASE_URL ?>admin/products/delete-image/<?= $product['id'] ?>/<?= $img['id'] ?>"
-                                  onsubmit="return confirm('Ștergi această imagine?')">
-                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
-                                <button type="submit" class="gallery-del-btn" title="Șterge">✕</button>
-                            </form>
+                            <button type="submit"
+                                    formaction="<?= BASE_URL ?>admin/products/delete-image/<?= $product['id'] ?>/<?= $img['id'] ?>"
+                                    formnovalidate
+                                    onclick="return confirm('Ștergi această imagine?')"
+                                    class="gallery-del-btn" title="Șterge">✕</button>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
@@ -168,7 +173,7 @@
         </div>
 
         <!-- ─── Variații de culoare ─── -->
-        <div class="form-group" style="margin-top:1.5rem;">
+        <div class="form-group" id="variable-settings" style="margin-top:1.5rem;<?= empty($product['is_variable']) ? 'display:none;' : '' ?>">
             <label style="font-weight:600;font-size:.95rem;">Variații de culoare</label>
             <p style="font-size:.8rem;color:#6b7280;margin:.25rem 0 .75rem;">
                 Fiecare culoare poate avea o imagine principală și 3 secundare (afișate în galeria produsului când culoarea este selectată).
@@ -216,13 +221,11 @@
                                 <div style="position:relative;margin-bottom:.35rem;">
                                     <img src="<?= BASE_URL ?>assets/images/products/<?= htmlspecialchars($currentImg) ?>"
                                          style="width:100%;height:70px;object-fit:cover;border-radius:4px;border:1px solid #e5e7eb;">
-                                    <form method="POST"
-                                          action="<?= BASE_URL ?>admin/products/delete-color-image/<?= $product['id'] ?>/<?= $cv['id'] ?>/<?= $slot['slot'] ?>"
-                                          onsubmit="return confirm('Ștergi imaginea?')"
-                                          style="margin:0;">
-                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
-                                        <button type="submit" style="margin-top:.25rem;font-size:.7rem;color:#ef4444;background:none;border:none;cursor:pointer;padding:0;">✕ Șterge</button>
-                                    </form>
+                                    <button type="submit"
+                                            formaction="<?= BASE_URL ?>admin/products/delete-color-image/<?= $product['id'] ?>/<?= $cv['id'] ?>/<?= $slot['slot'] ?>"
+                                            formnovalidate
+                                            onclick="return confirm('Ștergi imaginea?')"
+                                            style="margin-top:.25rem;font-size:.7rem;color:#ef4444;background:none;border:none;cursor:pointer;padding:0;">✕ Șterge</button>
                                 </div>
                             <?php endif; ?>
                             <input type="file" name="<?= $slot['inputName'] ?>[<?= $i ?>]"
@@ -250,6 +253,17 @@
 </div>
 
 <script>
+// Toggle color-variation settings with "Produs variabil"
+(function () {
+    const toggle   = document.getElementById('is_variable');
+    const settings = document.getElementById('variable-settings');
+    if (toggle && settings) {
+        toggle.addEventListener('change', function () {
+            settings.style.display = this.checked ? '' : 'none';
+        });
+    }
+})();
+
 document.getElementById('name').addEventListener('input', function () {
     const slug = document.getElementById('slug');
     if (slug.value === '') {
